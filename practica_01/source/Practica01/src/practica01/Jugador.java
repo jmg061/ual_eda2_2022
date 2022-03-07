@@ -17,6 +17,11 @@ public class Jugador {
         this.posiciones.add(position);
         this.puntuacion = score;
     }
+    
+    @Override
+    public boolean equals(Object o) {
+    	return this.nombre.equals(((Jugador)o).nombre);
+    }
 
     public String getPlayerName(){
         return this.nombre;
@@ -44,5 +49,9 @@ public class Jugador {
     }
     public void setScore(int score){
         this.puntuacion = score;
+    }
+    
+    public String toString() {
+    	return "Nombre: " + this.nombre +"\n\tPuntuacion: " + this.puntuacion + "\n\tEquipos: "+ this.equipos + "\n\tPosiciones: "+ this.posiciones;
     }
 }
