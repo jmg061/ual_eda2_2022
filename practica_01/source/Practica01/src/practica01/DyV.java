@@ -18,6 +18,46 @@ public class DyV {
 			e.printStackTrace();
 		}
 		
+		
+		
+	}
+	
+	public static void mergesort(Jugador A[], int izq, int der) {
+		if (izq > der) {
+			int medio = (int) Math.ceil((izq + der)/2);
+			mergesort(A, izq, medio);
+			mergesort(A, medio + 1, der);
+			merge(A, izq, medio, der);
+			
+		}
+	}
+	
+	public static void merge(Jugador A[] , int izq, int medio, int der) {
+		int i, j;
+		Jugador[] aux = new Jugador[A.length];
+		for (int l = 0; l < aux.length; l++) {
+			aux[l] = A[l];
+		}
+		
+		i = izq;
+		j = medio + 1;
+		
+		while (izq <= medio && j <= der) {
+			if (A[izq].getScore() > A[j].getScore()) {
+				aux[i++] = A[izq++];
+			}else {
+				aux[i++] = A[j++];
+			}
+		}
+		
+		while (izq < medio) {
+			aux[i++] = A[izq ++];
+			
+		}
+		while (j < der) {
+			aux[i++] = A[j++];
+		}
+		
 	}
 
 }
