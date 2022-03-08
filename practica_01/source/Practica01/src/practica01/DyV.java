@@ -8,43 +8,45 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class DyV {
-	
+
 	ArrayList<Jugador> datos;
-	
+
 	public DyV() {
-		
-		this.datos=new ArrayList<>();
-		
+
+		this.datos = new ArrayList<>();
+
 	}
-	
+
 	public void load() {
-		
-		BufferedReader br=null;
+
+		BufferedReader br = null;
 		String line;
 		String[] items;
-		Jugador aux=null;
-		
+		Jugador aux = null;
+
 		try {
-			br=new BufferedReader(new FileReader("src"+File.separator+"practica01"+File.separator+"NbaStats.csv"));
+			br = new BufferedReader(
+					new FileReader("src" + File.separator + "practica01" + File.separator + "NbaStats.csv"));
 			while ((line = br.readLine()) != null) {
-				if(line.contains("#")) continue;
-				items=line.split(";");
-				aux=new Jugador(items[2],items[6],items[4], Integer.parseInt(items[8]));
-				if(!this.datos.contains(aux))
-				//System.out.println(this.datos.contains(aux));
+				if (line.contains("#"))
+					continue;
+				items = line.split(";");
+				aux = new Jugador(items[2], items[6], items[4], Integer.parseInt(items[8]));
+				if (!this.datos.contains(aux))
+					// System.out.println(this.datos.contains(aux));
 					this.datos.add(aux);
 				else {
-					
-					int pos=this.datos.indexOf(aux);
-					int score=(this.datos.get(pos).getScore()+Integer.parseInt(items[8]))/2;
+
+					int pos = this.datos.indexOf(aux);
+					int score = (this.datos.get(pos).getScore() + Integer.parseInt(items[8])) / 2;
 					this.datos.get(pos).setScore(score);
-					if(!this.datos.get(pos).getPositions().contains(items[4]))
-					this.datos.get(pos).getPositions().add(items[4]);
-					if(!this.datos.get(pos).getTeams().contains(items[6]))
-					this.datos.get(pos).getTeams().add(items[6]);
+					if (!this.datos.get(pos).getPositions().contains(items[4]))
+						this.datos.get(pos).getPositions().add(items[4]);
+					if (!this.datos.get(pos).getTeams().contains(items[6]))
+						this.datos.get(pos).getTeams().add(items[6]);
 				}
-				//for(String word : items) System.out.println(word);
-				
+				// for(String word : items) System.out.println(word);
+
 			}
 			br.close();
 		} catch (FileNotFoundException e) {
@@ -54,7 +56,55 @@ public class DyV {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
+	}
+	
+	public void mergesort() {
+		mergesort(0, this.datos.size() - 1);
+	}
+
+	public void mergesort(int izq, int der) {
+		if (izq < der && (der-izq)>=1) {
+			int medio = (izq + der) / 2;
+			mergesort(izq, medio);
+			mergesort(medio + 1, der);
+			merge(izq, medio, der);
+
+		}
+	}
+
+	public void merge(int izq, int medio, int der) {
+		int i, j, x;
+		ArrayList<Jugador>  aux = new ArrayList<Jugador>();
+
+		j = medio + 1;
+		x = izq;
+
+		while (izq <= medio && j <= der) {
+			if (this.datos.get(izq).getScore() > this.datos.get(j).getScore()) {
+				aux.add(this.datos.get(izq));
+				izq++;
+			} else {
+				aux.add(this.datos.get(j));
+				j++;
+			}
+		}
+
+		while (izq <= medio) {
+			aux.add(this.datos.get(izq));
+			izq++;
+
+		}
+		while (j <= der) {
+			aux.add(this.datos.get(j));
+			j++;
+		}
+		i = 0;
+		while(i < aux.size()){
+			this.datos.set(x, aux.get(i++));
+            x++;
+        }
+
 	}
 
 	public ArrayList<Jugador> getDatos() {
