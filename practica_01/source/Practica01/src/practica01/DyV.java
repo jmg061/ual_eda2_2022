@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class DyV {
 	
-	private ArrayList<Jugador> datos;
+	ArrayList<Jugador> datos;
 	
 	public DyV() {
 		
