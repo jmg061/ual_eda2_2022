@@ -59,44 +59,52 @@ public class DyV {
 		}
 
 	}
+	
+	public void mergesort() {
+		mergesort(0, this.datos.size() - 1);
+	}
 
-	public void mergesort(ArrayList<Jugador> A, int izq, int der) {
-		if (izq < der) {
-			int medio = (int) Math.ceil((izq + der) / 2);
-			mergesort(A, izq, medio);
-			mergesort(A, medio + 1, der);
-			merge(A, izq, medio, der);
+	public void mergesort(int izq, int der) {
+		if (izq < der && (der-izq)>=1) {
+			int medio = (izq + der) / 2;
+			mergesort(izq, medio);
+			mergesort(medio + 1, der);
+			merge(izq, medio, der);
 
 		}
 	}
 
-	public void merge(ArrayList<Jugador> a, int izq, int medio, int der) {
-		int i, j;
+	public void merge(int izq, int medio, int der) {
+		int i, j, x;
 		ArrayList<Jugador>  aux = new ArrayList<Jugador>();
-		for (Jugador jugador : aux) {
-			aux.add(jugador);
-		}
 
-		i = izq;
 		j = medio + 1;
+		x = izq;
 
 		while (izq <= medio && j <= der) {
-			if (a.get(izq).getScore() > a.get(j).getScore()) {
-				a.set(i++, aux.get(izq++));
+			if (this.datos.get(izq).getScore() > this.datos.get(j).getScore()) {
+				aux.add(this.datos.get(izq));
+				izq++;
 			} else {
-				a.set(i++, aux.get(j++));
+				aux.add(this.datos.get(j));
+				j++;
 			}
 		}
 
-		while (izq < medio) {
-			a.set(i++, aux.get(izq++));
+		while (izq <= medio) {
+			aux.add(this.datos.get(izq));
+			izq++;
 
 		}
-		while (j < der) {
-			a.set(i++, aux.get(j++));
+		while (j <= der) {
+			aux.add(this.datos.get(j));
+			j++;
 		}
-		
-		
+		i = 0;
+		while(i < aux.size()){
+			this.datos.set(x, aux.get(i++));
+            x++;
+        }
 
 	}
 
