@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class DyV {
 
-	ArrayList<Jugador> datos;
+	private ArrayList<Jugador> datos;
 
 	public DyV() {
 
@@ -37,13 +37,12 @@ public class DyV {
 					this.datos.add(aux);
 				else {
 
-					int pos = this.datos.indexOf(aux);
-					int score = (this.datos.get(pos).getScore() + Integer.parseInt(items[8])) / 2;
-					this.datos.get(pos).setScore(score);
-					if (!this.datos.get(pos).getPositions().contains(items[4]))
-						this.datos.get(pos).getPositions().add(items[4]);
-					if (!this.datos.get(pos).getTeams().contains(items[6]))
-						this.datos.get(pos).getTeams().add(items[6]);
+					aux = this.datos.get(this.datos.indexOf(aux));
+					aux.setScore((aux.getScore()+Integer.parseInt(items[8]))/2);
+					if (!aux.getPositions().contains(items[4]))
+						aux.getPositions().add(items[4]);
+					if (!aux.getTeams().contains(items[6]))
+						aux.getTeams().add(items[6]);
 				}
 				// for(String word : items) System.out.println(word);
 
