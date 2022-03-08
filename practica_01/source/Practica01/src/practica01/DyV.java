@@ -62,7 +62,7 @@ public class DyV {
 		mergesort(0, this.datos.size() - 1);
 	}
 
-	public void mergesort(int izq, int der) {
+	private void mergesort(int izq, int der) {
 		if (izq < der && (der-izq)>=1) {
 			int medio = (izq + der) / 2;
 			mergesort(izq, medio);
@@ -72,7 +72,7 @@ public class DyV {
 		}
 	}
 
-	public void merge(int izq, int medio, int der) {
+	private void merge(int izq, int medio, int der) {
 		int i, j, x;
 		ArrayList<Jugador>  aux = new ArrayList<Jugador>();
 

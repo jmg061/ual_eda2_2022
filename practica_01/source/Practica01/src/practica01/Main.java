@@ -7,11 +7,11 @@ public class Main {
 
 		DyV jugadores = new DyV();
 		jugadores.load();
-		System.out.println(jugadores.getDatos().size());
+		//System.out.println(jugadores.getDatos().size());
 		jugadores.mergesort();
-		System.out.println(jugadores.getDatos().size());
-		for(Jugador aux : jugadores.getDatos())
-			System.out.println(aux);
+		//System.out.println(jugadores.getDatos().size());
+		for(int i=0; i<10; i++)
+			System.out.println(jugadores.getDatos().get(i));
 //		System.out.println(jugadores.getDatos().get(0));
 //		System.out.println(jugadores.getDatos().get(1));
 //		System.out.println(jugadores.getDatos().get(2));
