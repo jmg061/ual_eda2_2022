@@ -5,12 +5,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class DyV {
 	
-	ArrayList<Jugador> datos;
+	private ArrayList<Jugador> datos;
 	
 	public DyV() {
 		

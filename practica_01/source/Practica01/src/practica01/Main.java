@@ -9,6 +9,8 @@ public class Main {
 		jugadores.load();
 		for(Jugador aux : jugadores.getDatos())
 			System.out.println(aux);
+		Jugador[] arr = new Jugador[jugadores.getDatos().size()];
+		jugadores.getDatos().toArray(arr);
 		
 	}
 
