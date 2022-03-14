@@ -1,5 +1,6 @@
 package practica01;
 
+import java.util.Collections;
 import java.util.PriorityQueue;
 
 public class Main {
@@ -12,7 +13,8 @@ public class Main {
 		// System.out.println(jugadores.getDatos().size());
 		System.out.println("Con Heap:");
 		long inicio = System.currentTimeMillis();
-		PriorityQueue<Jugador> aux = jugadores.reduce();
+		PriorityQueue<Jugador> aux = new PriorityQueue<>(Collections.reverseOrder());
+		aux.addAll(jugadores.reduce());
 		long fin = System.currentTimeMillis();
 		 double tiempo = (double) ((fin - inicio));
 		 System.out.println("Tiempo => " + tiempo);
