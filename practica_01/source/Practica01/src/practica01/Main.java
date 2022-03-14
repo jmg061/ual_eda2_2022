@@ -13,19 +13,20 @@ public class Main {
 		// System.out.println(jugadores.getDatos().size());
 		System.out.println("Con Heap:");
 		long inicio = System.currentTimeMillis();
-		PriorityQueue<Jugador> aux = new PriorityQueue<>(Collections.reverseOrder());
-		aux.addAll(jugadores.reduce());
+		//PriorityQueue<Jugador> aux = new PriorityQueue<>(Collections.reverseOrder());
+		//aux.addAll(jugadores.reduce());
+		PriorityQueue<Jugador> aux = jugadores.reduce();
 		long fin = System.currentTimeMillis();
 		 double tiempo = (double) ((fin - inicio));
 		 System.out.println("Tiempo => " + tiempo);
-		 DyV megsort = new DyV();
-		 System.out.println("Con MergeSort");
-		 megsort.load();
-		 inicio = System.currentTimeMillis();
-		 megsort.mergesort();
-		 fin = System.currentTimeMillis();
-		 tiempo = (double) ((fin - inicio));
-		 System.out.println("Tiempo => " + tiempo);
+		 //DyV megsort = new DyV();
+		 //System.out.println("Con MergeSort");
+		 //megsort.load();
+		 //inicio = System.currentTimeMillis();
+		 //megsort.mergesort();
+		 //fin = System.currentTimeMillis();
+		 //tiempo = (double) ((fin - inicio));
+		 //System.out.println("Tiempo => " + tiempo);
 //		 for (Jugador jugador : megsort.getDatos()) {
 //			System.out.println(jugador.toString());
 //		}
@@ -39,9 +40,9 @@ public class Main {
 		// System.out.println(jugadores.getDatos().size());
 		// for(int i=0; i<10; i++)
 		// System.out.println(jugadores.getDatos().get(i));
-		for (int i = 0; i < 10; i++) {
+		/*for (int i = 0; i < 10; i++) {
 			System.out.println(megsort.getDatos().get(i));	
-		}
+		}*/
 		
 
 	}

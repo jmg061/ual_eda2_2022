@@ -32,15 +32,23 @@ public class DyV {
 				if (line.contains("#"))
 					continue;
 				items = line.split(";");
-				System.out.println(Double.parseDouble(items[7]));
-				aux = new Jugador(items[2], items[6], items[4], (int)(Double.parseDouble(items[7])/100*Integer.parseInt(items[8])));
+				//System.out.println(Double.parseDouble(items[7].replace(",", ".")));
+				double calculo;
+				if(items[7].isEmpty()) calculo=0;
+				else
+				calculo=Double.parseDouble(items[7].replace(",", "."))/100*Integer.parseInt(items[8]);
+				//System.out.println((int)calculo);
+				aux = new Jugador(items[2], items[6], items[4], (int)calculo);
 				if (!this.datos.contains(aux))
 					// System.out.println(this.datos.contains(aux));
 					this.datos.add(aux);
 				else {
-
+					//int calculo;
+					if(items[7].isEmpty()) calculo=0;
+					else
+					calculo=Double.parseDouble(items[7].replace(",", "."))/100*Integer.parseInt(items[8]);
 					aux = this.datos.get(this.datos.indexOf(aux));
-					aux.setScore((int)(aux.getScore() + Double.parseDouble(items[7])/100*Integer.parseInt(items[8])) / 2);
+					aux.setScore((int)(aux.getScore() + (int)calculo)/2);
 					if (!aux.getPositions().contains(items[4]))
 						aux.getPositions().add(items[4]);
 					if (!aux.getTeams().contains(items[6]))
