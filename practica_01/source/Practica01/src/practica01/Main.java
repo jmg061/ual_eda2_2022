@@ -1,6 +1,6 @@
 package practica01;
 
-import java.util.Collections;
+//import java.util.Collections;
 import java.util.PriorityQueue;
 
 public class Main {
