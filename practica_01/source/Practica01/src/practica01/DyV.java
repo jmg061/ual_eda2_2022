@@ -32,14 +32,15 @@ public class DyV {
 				if (line.contains("#"))
 					continue;
 				items = line.split(";");
-				aux = new Jugador(items[2], items[6], items[4], Integer.parseInt(items[8]));
+				System.out.println(Double.parseDouble(items[7]));
+				aux = new Jugador(items[2], items[6], items[4], (int)(Double.parseDouble(items[7])/100*Integer.parseInt(items[8])));
 				if (!this.datos.contains(aux))
 					// System.out.println(this.datos.contains(aux));
 					this.datos.add(aux);
 				else {
 
 					aux = this.datos.get(this.datos.indexOf(aux));
-					aux.setScore((aux.getScore() + Integer.parseInt(items[8])) / 2);
+					aux.setScore((int)(aux.getScore() + Double.parseDouble(items[7])/100*Integer.parseInt(items[8])) / 2);
 					if (!aux.getPositions().contains(items[4]))
 						aux.getPositions().add(items[4]);
 					if (!aux.getTeams().contains(items[6]))
