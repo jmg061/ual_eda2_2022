@@ -32,9 +32,9 @@ public class Main {
 		tiempo = (double) ((fin - inicio));
 		System.out.println("Tiempo => " + tiempo);
 		
-		for (int i = 0; i < 10; i++) {
-			System.out.println(megsort.getDatos().get(i));
-		}
+//		for (int i = 0; i < 10; i++) {
+//			System.out.println(megsort.getDatos().get(i));
+//		}
 
 		
 		DyV megsort2 = new DyV();

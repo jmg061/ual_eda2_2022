@@ -134,7 +134,7 @@ public class DyV {
 	}
 	
 	private void merge2(int izq, int medio, int der) {
-		int i, j, x;
+		int x, j;
 		ArrayList<Jugador> aux = new ArrayList<Jugador>();
 
 		j = medio + 1;
@@ -142,16 +142,8 @@ public class DyV {
 
 		while (izq <= medio && j <= der) {
 			if (this.datos.get(izq).getScore() > this.datos.get(j).getScore()) {
-				if (this.datos.get(izq).getScore() > arrAux[0].getScore()) {
-					arrAux[0] = this.datos.get(izq);
-					burbuja(arrAux);
-				}
-				izq++;
-			} else {
-				if (this.datos.get(j).getScore() > arrAux[9].getScore()) {
 					arrAux[0] = this.datos.get(j);
 					burbuja(arrAux);
-				}
 				j++;
 			}
 		}
@@ -171,7 +163,6 @@ public class DyV {
 			}
 			j++;
 		}
-		i = 0;
 //		while (i < aux.size()) {
 //			this.datos.set(x, aux.get(i++));
 //			x++;
