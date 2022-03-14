@@ -11,7 +11,11 @@ public class Main {
 		jugadores.load();
 		// System.out.println(jugadores.getDatos().size());
 		System.out.println("El mio:");
+		long inicio = System.currentTimeMillis();
 		PriorityQueue<Jugador> aux = jugadores.reduce();
+		long fin = System.currentTimeMillis();
+		 double tiempo = (double) ((fin - inicio));
+		 System.out.println("Tiempo => " + tiempo);
 		while (!aux.isEmpty())
 			System.out.println(aux.poll());
 		/*
