@@ -11,6 +11,7 @@ import java.util.PriorityQueue;
 public class DyV {
 
 	private ArrayList<Jugador> datos;
+	private Jugador[] arrAux = new Jugador[10];
 
 	public DyV() {
 
@@ -19,6 +20,9 @@ public class DyV {
 	}
 
 	public void load() {
+		for (int i = 0; i < 10; i++) {
+			arrAux[i] = new Jugador(null, null, null, Integer.MIN_VALUE);
+		}
 
 		BufferedReader br = null;
 		String line;
@@ -71,6 +75,10 @@ public class DyV {
 	public void mergesort() {
 		mergesort(0, this.datos.size() - 1);
 	}
+	
+	public void mergesort2() {
+		mergesort2(0, this.datos.size() - 1);
+	}
 
 	private void mergesort(int izq, int der) {
 		if (izq < der && (der - izq) >= 1) {
@@ -78,6 +86,15 @@ public class DyV {
 			mergesort(izq, medio);
 			mergesort(medio + 1, der);
 			merge(izq, medio, der);
+
+		}
+	}
+	private void mergesort2(int izq, int der) {
+		if (izq < der && (der - izq) >= 1) {
+			int medio = (izq + der) / 2;
+			mergesort2(izq, medio);
+			mergesort2(medio + 1, der);
+			merge2(izq, medio, der);
 
 		}
 	}
@@ -115,6 +132,66 @@ public class DyV {
 		}
 
 	}
+	
+	private void merge2(int izq, int medio, int der) {
+		int i, j, x;
+		ArrayList<Jugador> aux = new ArrayList<Jugador>();
+
+		j = medio + 1;
+		x = izq;
+
+		while (izq <= medio && j <= der) {
+			if (this.datos.get(izq).getScore() > this.datos.get(j).getScore()) {
+				if (this.datos.get(izq).getScore() > arrAux[0].getScore()) {
+					arrAux[0] = this.datos.get(izq);
+					burbuja(arrAux);
+				}
+				izq++;
+			} else {
+				if (this.datos.get(j).getScore() > arrAux[9].getScore()) {
+					arrAux[0] = this.datos.get(j);
+					burbuja(arrAux);
+				}
+				j++;
+			}
+		}
+
+		while (izq <= medio) {
+			if (this.datos.get(izq).getScore() > arrAux[0].getScore()) {
+				arrAux[0] = this.datos.get(izq);
+				burbuja(arrAux);
+			}
+			izq++;
+
+		}
+		while (j <= der) {
+			if (this.datos.get(j).getScore() > arrAux[0].getScore()) {
+				arrAux[0] = this.datos.get(j);
+				burbuja(arrAux);
+			}
+			j++;
+		}
+		i = 0;
+//		while (i < aux.size()) {
+//			this.datos.set(x, aux.get(i++));
+//			x++;
+//		}
+
+	}
+	
+	private void burbuja(Jugador[] A) {
+        int i, j;
+        Jugador aux = new Jugador(null, null, null, Integer.MIN_VALUE);
+        for (i = 0; i < A.length - 1; i++) {
+            for (j = 0; j < A.length - i - 1; j++) {                                                              
+                if (A[j + 1].getScore() < A[j].getScore()) {
+                    aux = A[j + 1];
+                    A[j + 1] = A[j];
+                    A[j] = aux;
+                }
+            }
+        }
+}
 
 	public PriorityQueue<Jugador> reduce() {
 
@@ -196,6 +273,10 @@ public class DyV {
 
 	public void setDatos(ArrayList<Jugador> datos) {
 		this.datos = datos;
+	}
+
+	public Jugador[] getArrAux() {
+		return arrAux;
 	}
 
 }
