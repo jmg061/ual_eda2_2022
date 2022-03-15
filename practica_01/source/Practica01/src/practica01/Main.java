@@ -19,7 +19,6 @@ public class Main {
 		
 //		while (!aux.isEmpty()) {
 //			System.out.println(aux.poll());
-//			
 //		}
 		
 		
@@ -32,24 +31,11 @@ public class Main {
 		tiempo = (double) ((fin - inicio));
 		System.out.println("Tiempo => " + tiempo);
 		
-//		for (int i = 0; i < 10; i++) {
-//			System.out.println(megsort.getDatos().get(i));
-//		}
-
-		
-		DyV megsort2 = new DyV();
-		System.out.println("Con MergeSort2");
-		megsort2.load();
-		inicio = System.currentTimeMillis();
-		megsort2.mergesort2();
-		fin = System.currentTimeMillis();
-		tiempo = (double) ((fin - inicio));
-		System.out.println("Tiempo => " + tiempo);
-		
-		for (Jugador jugador : megsort2.getArrAux()) {
-			System.out.println(jugador);
+		for (int i = 0; i < 10; i++) {
+			System.out.println(megsort.getDatos().get(i));
 		}
 
+		
 	}
 
 }
