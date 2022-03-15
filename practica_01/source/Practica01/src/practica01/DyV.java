@@ -120,7 +120,66 @@ public class DyV {
 		}
 
 	}
+
+	private void merge2(int izq, int medio, int der) {
+		int j;
+		//ArrayList<Jugador> aux = new ArrayList<Jugador>();
+
+		j = medio + 1;
+		//x = izq;
+
+		while (izq <= medio && j <= der) {
+			if (this.datos.get(izq).getScore() > this.datos.get(j).getScore()) {
+				if (this.datos.get(izq).getScore() > arrAux[0].getScore()) {
+					arrAux[0] = this.datos.get(izq);
+					burbuja(arrAux);
+				}
+				izq++;
+			} else {
+				if (this.datos.get(j).getScore() > arrAux[9].getScore()) {
+					arrAux[0] = this.datos.get(j);
+					burbuja(arrAux);
+				}
+				j++;
+			}
+		}
+
+		while (izq <= medio) {
+			if (this.datos.get(izq).getScore() > arrAux[0].getScore()) {
+				arrAux[0] = this.datos.get(izq);
+				burbuja(arrAux);
+			}
+			izq++;
+
+		}
+		while (j <= der) {
+			if (this.datos.get(j).getScore() > arrAux[0].getScore()) {
+				arrAux[0] = this.datos.get(j);
+				burbuja(arrAux);
+			}
+			j++;
+		}
+//		i = 0;
+//		while (i < aux.size()) {
+//			this.datos.set(x, aux.get(i++));
+//			x++;
+//		}
+
+	}
 	
+	private void burbuja(Jugador[] A) {
+        int i, j;
+        Jugador aux = new Jugador(null, null, null, Integer.MIN_VALUE);
+        for (i = 0; i < A.length - 1; i++) {
+            for (j = 0; j < A.length - i - 1; j++) {                                                              
+                if (A[j + 1].getScore() < A[j].getScore()) {
+                    aux = A[j + 1];
+                    A[j + 1] = A[j];
+                    A[j] = aux;
+                }
+            }
+        }
+}
 
 	public PriorityQueue<Jugador> reduce() {
 
@@ -194,6 +253,43 @@ public class DyV {
 		aux.clear();
 		// System.out.println(data);
 		return data;
+	}
+	
+	
+	public PriorityQueue<Jugador> deDiezEnDiez(){
+		
+		PriorityQueue<Jugador> result = new PriorityQueue<>();
+		ArrayList<PriorityQueue<Jugador>> aux = new ArrayList<>();
+		
+		for(int i = 0 ; i<this.datos.size(); i ++) {
+			aux.add(new PriorityQueue<Jugador>());
+			for(int cont = 0; cont<10; cont++) {
+				if((10*i+cont)<this.datos.size())
+					aux.get(i).add(this.datos.get(10*i+cont));
+				//if((i+1)<this.datos.size())
+					//i++;
+			}
+			
+		}
+		
+		for(int i = aux.size()-1 ; i>=0 ; i--) {
+			//System.out.println(i);
+			
+			if(i==aux.size()-1) {
+				//System.out.println(aux.get(i));
+				result.addAll(aux.get(i));
+				//System.out.println(result.size());
+				i--;
+			}
+			result.addAll(aux.get(i));
+			while(result.size()>10) {
+				result.poll();
+				//System.out.println(result.size());
+			}
+			
+		}
+		
+		return result;
 	}
 
 	public ArrayList<Jugador> getDatos() {
