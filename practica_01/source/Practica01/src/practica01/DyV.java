@@ -134,11 +134,11 @@ public class DyV {
 	}
 	
 	private void merge2(int izq, int medio, int der) {
-		int i, j, x;
-		ArrayList<Jugador> aux = new ArrayList<Jugador>();
+		int j;
+		//ArrayList<Jugador> aux = new ArrayList<Jugador>();
 
 		j = medio + 1;
-		x = izq;
+		//x = izq;
 
 		while (izq <= medio && j <= der) {
 			if (this.datos.get(izq).getScore() > this.datos.get(j).getScore()) {
@@ -171,7 +171,7 @@ public class DyV {
 			}
 			j++;
 		}
-		i = 0;
+//		i = 0;
 //		while (i < aux.size()) {
 //			this.datos.set(x, aux.get(i++));
 //			x++;
@@ -265,6 +265,43 @@ public class DyV {
 		aux.clear();
 		// System.out.println(data);
 		return data;
+	}
+	
+	
+	public PriorityQueue<Jugador> deDiezEnDiez(){
+		
+		PriorityQueue<Jugador> result = new PriorityQueue<>();
+		ArrayList<PriorityQueue<Jugador>> aux = new ArrayList<>();
+		
+		for(int i = 0 ; i<this.datos.size(); i ++) {
+			aux.add(new PriorityQueue<Jugador>());
+			for(int cont = 0; cont<10; cont++) {
+				if((10*i+cont)<this.datos.size())
+					aux.get(i).add(this.datos.get(10*i+cont));
+				//if((i+1)<this.datos.size())
+					//i++;
+			}
+			
+		}
+		
+		for(int i = aux.size()-1 ; i>=0 ; i--) {
+			//System.out.println(i);
+			
+			if(i==aux.size()-1) {
+				//System.out.println(aux.get(i));
+				result.addAll(aux.get(i));
+				//System.out.println(result.size());
+				i--;
+			}
+			result.addAll(aux.get(i));
+			while(result.size()>10) {
+				result.poll();
+				//System.out.println(result.size());
+			}
+			
+		}
+		
+		return result;
 	}
 
 	public ArrayList<Jugador> getDatos() {
