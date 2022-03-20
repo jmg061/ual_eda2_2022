@@ -121,52 +121,6 @@ public class DyV {
 
 	}
 
-	private void merge2(int izq, int medio, int der) {
-		int j;
-		//ArrayList<Jugador> aux = new ArrayList<Jugador>();
-
-		j = medio + 1;
-		//x = izq;
-
-		while (izq <= medio && j <= der) {
-			if (this.datos.get(izq).getScore() > this.datos.get(j).getScore()) {
-				if (this.datos.get(izq).getScore() > arrAux[0].getScore()) {
-					arrAux[0] = this.datos.get(izq);
-					burbuja(arrAux);
-				}
-				izq++;
-			} else {
-				if (this.datos.get(j).getScore() > arrAux[9].getScore()) {
-					arrAux[0] = this.datos.get(j);
-					burbuja(arrAux);
-				}
-				j++;
-			}
-		}
-
-		while (izq <= medio) {
-			if (this.datos.get(izq).getScore() > arrAux[0].getScore()) {
-				arrAux[0] = this.datos.get(izq);
-				burbuja(arrAux);
-			}
-			izq++;
-
-		}
-		while (j <= der) {
-			if (this.datos.get(j).getScore() > arrAux[0].getScore()) {
-				arrAux[0] = this.datos.get(j);
-				burbuja(arrAux);
-			}
-			j++;
-		}
-//		i = 0;
-//		while (i < aux.size()) {
-//			this.datos.set(x, aux.get(i++));
-//			x++;
-//		}
-
-	}
-	
 	private void burbuja(Jugador[] A) {
         int i, j;
         Jugador aux = new Jugador(null, null, null, Integer.MIN_VALUE);
