@@ -125,6 +125,70 @@ public class DyV {
 
 	}
 
+<<<<<<< Updated upstream
+=======
+	@SuppressWarnings("unused")
+	private void merge2(int izq, int medio, int der) {
+		int j;
+		//ArrayList<Jugador> aux = new ArrayList<Jugador>();
+
+		j = medio + 1;
+		//x = izq;
+
+		while (izq <= medio && j <= der) {
+			if (this.datos.get(izq).getScore() > this.datos.get(j).getScore()) {
+				if (this.datos.get(izq).getScore() > arrAux[0].getScore()) {
+					arrAux[0] = this.datos.get(izq);
+					burbuja(arrAux);
+				}
+				izq++;
+			} else {
+				if (this.datos.get(j).getScore() > arrAux[9].getScore()) {
+					arrAux[0] = this.datos.get(j);
+					burbuja(arrAux);
+				}
+				j++;
+			}
+		}
+
+		while (izq <= medio) {
+			if (this.datos.get(izq).getScore() > arrAux[0].getScore()) {
+				arrAux[0] = this.datos.get(izq);
+				burbuja(arrAux);
+			}
+			izq++;
+
+		}
+		while (j <= der) {
+			if (this.datos.get(j).getScore() > arrAux[0].getScore()) {
+				arrAux[0] = this.datos.get(j);
+				burbuja(arrAux);
+			}
+			j++;
+		}
+//		i = 0;
+//		while (i < aux.size()) {
+//			this.datos.set(x, aux.get(i++));
+//			x++;
+//		}
+
+	}
+	
+	private void burbuja(Jugador[] A) {
+        int i, j;
+        Jugador aux = new Jugador(null, null, null, Integer.MIN_VALUE);
+        for (i = 0; i < A.length - 1; i++) {
+            for (j = 0; j < A.length - i - 1; j++) {                                                              
+                if (A[j + 1].getScore() < A[j].getScore()) {
+                    aux = A[j + 1];
+                    A[j + 1] = A[j];
+                    A[j] = aux;
+                }
+            }
+        }
+}
+
+>>>>>>> Stashed changes
 	public PriorityQueue<Jugador> reduce() {
 
 		PriorityQueue<Jugador> data = new PriorityQueue<>();
