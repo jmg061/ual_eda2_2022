@@ -12,6 +12,10 @@ public class DyV {
 
 	private ArrayList<Jugador> datos;
 	private Jugador[] arrAux = new Jugador[10];
+	
+	public DyV (ArrayList<Jugador> datos) {
+		this.datos = datos;
+	}
 
 	public DyV() {
 
@@ -120,20 +124,6 @@ public class DyV {
 		}
 
 	}
-
-	private void burbuja(Jugador[] A) {
-        int i, j;
-        Jugador aux = new Jugador(null, null, null, Integer.MIN_VALUE);
-        for (i = 0; i < A.length - 1; i++) {
-            for (j = 0; j < A.length - i - 1; j++) {                                                              
-                if (A[j + 1].getScore() < A[j].getScore()) {
-                    aux = A[j + 1];
-                    A[j + 1] = A[j];
-                    A[j] = aux;
-                }
-            }
-        }
-}
 
 	public PriorityQueue<Jugador> reduce() {
 
@@ -245,6 +235,66 @@ public class DyV {
 		
 		return result;
 	}
+	
+	public ArrayList<Jugador> mergesort2() {
+		mergesort(0, this.datos.size()/2);
+		mergesort(this.datos.size()/2 + 1, this.datos.size() - 1);
+		ArrayList<Jugador> salida = new ArrayList<Jugador>();
+		for (int i = 0; i < 10; i++) {
+			salida.add(this.datos.get(i));
+		}
+		for (int j = this.datos.size()/2 + 1; j < this.datos.size()/2 + 11; j++) {
+			salida.add(this.datos.get(j));
+		}
+		return salida;
+		
+	}
+	
+
+	private void mergesort2(int izq, int der) {
+		if (izq < der && (der - izq) >= 1) {
+			int medio = (izq + der) / 2;
+			mergesort2(izq, medio);
+			mergesort2(medio + 1, der);
+			merge2(izq, medio, der);
+
+		}
+	}
+
+	private void merge2(int izq, int medio, int der) {
+		int i, j, x;
+		ArrayList<Jugador> aux = new ArrayList<Jugador>();
+
+		j = medio + 1;
+		x = izq;
+
+		while (izq <= medio && j <= der) {
+			if (this.datos.get(izq).getScore() > this.datos.get(j).getScore()) {
+				aux.add(this.datos.get(izq));
+				izq++;
+			} else {
+				aux.add(this.datos.get(j));
+				j++;
+			}
+		}
+
+		while (izq <= medio) {
+			aux.add(this.datos.get(izq));
+			izq++;
+
+		}
+		while (j <= der) {
+			aux.add(this.datos.get(j));
+			j++;
+		}
+		i = 0;
+		while (i < aux.size()) {
+			this.datos.set(x, aux.get(i++));
+			x++;
+		}
+
+	}
+
 
 	public ArrayList<Jugador> getDatos() {
 		return datos;

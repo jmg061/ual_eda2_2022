@@ -1,5 +1,6 @@
 package practica01;
 
+import java.util.ArrayList;
 //import java.util.Collections;
 import java.util.PriorityQueue;
 
@@ -17,9 +18,9 @@ public class Main {
 		double tiempo = (double) ((fin - inicio));
 		System.out.println("Tiempo => " + tiempo);
 		
-		while (!aux.isEmpty()) {
-			System.out.println(aux.poll());
-		}
+//		while (!aux.isEmpty()) {
+//			System.out.println(aux.poll());
+//		}
 		
 		DyV megsort = new DyV();
 		System.out.println("Con MergeSort");
@@ -30,22 +31,10 @@ public class Main {
 		tiempo = (double) ((fin - inicio));
 		System.out.println("Tiempo => " + tiempo);
 		
-		for (int i = 0; i < 10; i++) {
-			System.out.println(megsort.getDatos().get(i));
-		}
+//		for (int i = 0; i < 10; i++) {
+//			System.out.println(megsort.getDatos().get(i));
+//		}
 
-		/*DyV megsort2 = new DyV();
-		System.out.println("Con MergeSort2");
-		megsort2.load();
-		inicio = System.currentTimeMillis();
-		megsort2.mergesort2();
-		fin = System.currentTimeMillis();
-		tiempo = (double) ((fin - inicio));
-		System.out.println("Tiempo => " + tiempo);
-		
-		for (Jugador jugador : megsort2.getArrAux()) {
-			System.out.println(jugador);
-		}*/
 		
 		DyV dediezendiez = new DyV();
 		System.out.println("Con DiezEnDiez");
@@ -56,9 +45,24 @@ public class Main {
 		tiempo = (double) ((fin - inicio));
 		System.out.println("Tiempo => " + tiempo);
 		
-		while (!aux.isEmpty()) {
-			System.out.println(aux.poll());
-		}
+//		while (!aux.isEmpty()) {
+//			System.out.println(aux.poll());
+//		}
+
+		DyV megsort2 = new DyV();
+		System.out.println("Con MergeSort2");
+		megsort2.load();
+		inicio = System.currentTimeMillis();
+		ArrayList<Jugador> ArrayListAux2 = megsort2.mergesort2();
+		DyV ObjetoAux = new DyV(ArrayListAux2);
+		ObjetoAux.mergesort();
+		fin = System.currentTimeMillis();
+		tiempo = (double) ((fin - inicio));
+		System.out.println("Tiempo => " + tiempo);
+		
+//		for (int i = 0; i < 10; i++) {
+//		System.out.println(ObjetoAux.getDatos().get(i));
+//	}
 
 	}
 
