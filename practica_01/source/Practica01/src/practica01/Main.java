@@ -55,6 +55,7 @@ public class Main {
 		System.out.println("Con MergeSort2");
 		megsort2.load();
 		inicio = System.currentTimeMillis();
+		@SuppressWarnings("unused")
 		ArrayList<Jugador> ArrayListAux2 = megsort2.mergesort2();
 		fin = System.currentTimeMillis();
 		tiempo = (double) ((fin - inicio));
