@@ -10,7 +10,7 @@ import org.junit.Test;
 
 public class JUnitTest {
 	
-	DyV dyv = new DyV();
+	//DyV dyv = new DyV();
 	
 	String[] nombres = {"Wilt Chamberlain*", "DeMar DeRozan", "Damian Lillard", "Kevin Durant",
 			"Anthony Davis", "Russell Westbrook", "Karl-Anthony Towns", "Stephen Curry", "James Harden",
@@ -60,6 +60,7 @@ public class JUnitTest {
 	@Test
 	public void cargaDatos() {
 		
+		DyV dyv = new DyV();
 		dyv.load();
 		assertTrue(dyv.getDatos().size()==3921);
 		
