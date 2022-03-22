@@ -41,7 +41,7 @@ public class Main {
 		System.out.println("Con DiezEnDiez");
 		dediezendiez.load();
 		inicio = System.currentTimeMillis();
-		/*PriorityQueue<Jugador>*/ aux = new PriorityQueue(Collections.reverseOrder());
+		/*PriorityQueue<Jugador>*/ aux = new PriorityQueue<>(Collections.reverseOrder());
 		aux.addAll(dediezendiez.deDiezEnDiez());
 		fin = System.currentTimeMillis();
 		tiempo = (double) ((fin - inicio));

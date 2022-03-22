@@ -72,7 +72,7 @@ public class JUnitTest {
 
 		DyV dyv = new DyV();
 		dyv.load();
-		PriorityQueue<Jugador> aux = new PriorityQueue(Collections.reverseOrder());
+		PriorityQueue<Jugador> aux = new PriorityQueue<>(Collections.reverseOrder());
 		aux.addAll(dyv.deDiezEnDiez());
 		
 		String comp="";
@@ -123,7 +123,7 @@ public class JUnitTest {
 		
 		String comp="";
 		
-		for(int i=0; i<10; i++)
+		for(int i=9; i<20; i++)
 			comp+=aux.get(i)+"\n\t";
 
 		assertEquals(ordenados, comp);
