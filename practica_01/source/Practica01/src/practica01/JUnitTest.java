@@ -12,18 +12,38 @@ public class JUnitTest {
 	
 	//DyV dyv = new DyV();
 	
-	String[] nombres = {"Wilt Chamberlain*", "DeMar DeRozan", "Damian Lillard", "Kevin Durant",
+	/*String[] nombres = {"Wilt Chamberlain*", "DeMar DeRozan", "Damian Lillard", "Kevin Durant",
 			"Anthony Davis", "Russell Westbrook", "Karl-Anthony Towns", "Stephen Curry", "James Harden",
-			"LeBron James"};
+			"LeBron James"};*/
 	
-	/*String ordenados = "Nombre: James Harden\n" + 
+	String ordenados = "Nombre: LeBron James\n" + 
+			"	Puntuacion: 1031\n" + 
+			"	Equipos: [CLE, MIA]\n" + 
+			"	Posiciones: [SG, SF, PF]\n" + 
+			"	Nombre: James Harden\n" + 
 			"	Puntuacion: 994\n" + 
 			"	Equipos: [OKC, HOU]\n" + 
 			"	Posiciones: [SG, PG]\n" + 
+			"	Nombre: Stephen Curry\n" + 
+			"	Puntuacion: 975\n" + 
+			"	Equipos: [GSW]\n" + 
+			"	Posiciones: [PG]\n" + 
+			"	Nombre: Karl-Anthony Towns\n" + 
+			"	Puntuacion: 965\n" + 
+			"	Equipos: [MIN]\n" + 
+			"	Posiciones: [C]\n" + 
+			"	Nombre: Russell Westbrook\n" + 
+			"	Puntuacion: 931\n" + 
+			"	Equipos: [OKC]\n" + 
+			"	Posiciones: [PG]\n" + 
 			"	Nombre: Anthony Davis\n" + 
 			"	Puntuacion: 894\n" + 
 			"	Equipos: [NOH, NOP]\n" + 
 			"	Posiciones: [PF, C]\n" + 
+			"	Nombre: Kevin Durant\n" + 
+			"	Puntuacion: 864\n" + 
+			"	Equipos: [SEA, OKC, GSW]\n" + 
+			"	Posiciones: [SG, SF]\n" + 
 			"	Nombre: Damian Lillard\n" + 
 			"	Puntuacion: 825\n" + 
 			"	Equipos: [POR]\n" + 
@@ -32,30 +52,10 @@ public class JUnitTest {
 			"	Puntuacion: 820\n" + 
 			"	Equipos: [TOR]\n" + 
 			"	Posiciones: [SG]\n" + 
-			"	Nombre: Andrew Wiggins\n" + 
-			"	Puntuacion: 780\n" + 
-			"	Equipos: [MIN]\n" + 
-			"	Posiciones: [SF]\n" + 
-			"	Nombre: Isaiah Thomas\n" + 
-			"	Puntuacion: 774\n" + 
-			"	Equipos: [SAC, TOT, PHO, BOS]\n" + 
-			"	Posiciones: [PG]\n" + 
-			"	Nombre: George Gervin*\n" + 
-			"	Puntuacion: 765\n" + 
-			"	Equipos: [SAS, CHI]\n" + 
-			"	Posiciones: [SF, SG]\n" + 
-			"	Nombre: Chet Walker*\n" + 
-			"	Puntuacion: 744\n" + 
-			"	Equipos: [SYR, PHI, CHI]\n" + 
-			"	Posiciones: [SF]\n" + 
-			"	Nombre: Bob Pettit*\n" + 
-			"	Puntuacion: 742\n" + 
-			"	Equipos: [MLH, STL]\n" + 
-			"	Posiciones: [PF, C]\n" + 
-			"	Nombre: Giannis Antetokounmpo\n" + 
-			"	Puntuacion: 738\n" + 
-			"	Equipos: [MIL]\n" + 
-			"	Posiciones: [SF, SG, PG]\n\t";*/
+			"	Nombre: Wilt Chamberlain*\n" + 
+			"	Puntuacion: 785\n" + 
+			"	Equipos: [PHW, SFW, TOT, PHI, LAL]\n" + 
+			"	Posiciones: [C]\n\t";
 
 	@Test
 	public void cargaDatos() {
@@ -72,12 +72,20 @@ public class JUnitTest {
 
 		DyV dyv = new DyV();
 		dyv.load();
-		PriorityQueue<Jugador> aux = dyv.deDiezEnDiez();
+		PriorityQueue<Jugador> aux = new PriorityQueue(Collections.reverseOrder());
+		aux.addAll(dyv.deDiezEnDiez());
 		
-		assertTrue(aux.size()==10);
+		String comp="";
+		
+		while(!aux.isEmpty())
+			comp+=aux.poll()+"\n\t";
+		
+		assertEquals(ordenados, comp);
+		
+		/*assertTrue(aux.size()==10);
 		
 		for(String nombre: nombres)
-			assertTrue(aux.contains(new Jugador(nombre, "", "", 0)));
+			assertTrue(aux.contains(new Jugador(nombre, "", "", 0)));*/
 		
 		dyv=null;
 	}
@@ -87,12 +95,22 @@ public class JUnitTest {
 
 		DyV dyv = new DyV();
 		dyv.load();
-		PriorityQueue<Jugador> aux = dyv.reduce();
+		//PriorityQueue<Jugador> aux = dyv.reduce();
 		
-		assertTrue(aux.size()==10);
+		PriorityQueue<Jugador> aux = new PriorityQueue<>(Collections.reverseOrder());
+		aux.addAll(dyv.deDiezEnDiez());
+		
+		String comp="";
+		
+		while(!aux.isEmpty())
+			comp+=aux.poll()+"\n\t";
+		
+		assertEquals(ordenados, comp);
+		
+		/*assertTrue(aux.size()==10);
 		
 		for(String nombre: nombres)
-			assertTrue(aux.contains(new Jugador(nombre, "", "", 0)));
+			assertTrue(aux.contains(new Jugador(nombre, "", "", 0)));*/
 		
 	}
 	
@@ -105,16 +123,16 @@ public class JUnitTest {
 		
 		String comp="";
 		
-		/*for(int i=0; i<10; i++)
-			comp+=aux.get(i)+"\n\t";*/
+		for(int i=0; i<10; i++)
+			comp+=aux.get(i)+"\n\t";
 
-		//assertEquals(ordenados, comp);
+		assertEquals(ordenados, comp);
 		
-		for(int i = 0; i<10; i++)
+		/*for(int i = 0; i<10; i++)
 			aux.add(dyv.getDatos().get(i));
 		
 		for(String nombre: nombres)
-			assertTrue(aux.contains(new Jugador(nombre, "", "", 0)));
+			assertTrue(aux.contains(new Jugador(nombre, "", "", 0)));*/
 		
 	}
 	
@@ -127,11 +145,21 @@ public class JUnitTest {
 		dyv.mergesort();
 		ArrayList<Jugador> aux = new ArrayList<Jugador>();
 
+		String comp="";
+		
 		for(int i = 0; i<10; i++)
 			aux.add(dyv.getDatos().get(i));
 		
+		for(int i=0; i<10; i++)
+			comp+=aux.get(i)+"\n\t";
+
+		assertEquals(ordenados, comp);
+		
+		/*for(int i = 0; i<10; i++)
+			aux.add(dyv.getDatos().get(i));
+		
 		for(String nombre: nombres)
-			assertTrue(aux.contains(new Jugador(nombre, "", "", 0)));
+			assertTrue(aux.contains(new Jugador(nombre, "", "", 0)));*/
 		
 	}
 }
