@@ -81,12 +81,12 @@ public class DyV {
 	}
 	
 
-	private void mergesort(int izq, int der) {
+	private void mergesort(int izq, int der) { // O(n*log(n))
 		if (izq < der && (der - izq) >= 1) {
 			int medio = (izq + der) / 2;
-			mergesort(izq, medio);
-			mergesort(medio + 1, der);
-			merge(izq, medio, der);
+			mergesort(izq, medio); // log(n)
+			mergesort(medio + 1, der); // log(n)
+			merge(izq, medio, der); // n 
 
 		}
 	}
@@ -246,21 +246,23 @@ public class DyV {
 		for (int j = this.datos.size()/2 + 1; j < this.datos.size()/2 + 11; j++) {
 			salida.add(this.datos.get(j));
 		}
-		return salida;
+		DyV ObjetoAux = new DyV(salida);
+		ObjetoAux.mergesort();
+		return ObjetoAux.datos;
 		
 	}
 	
 
 	@SuppressWarnings("unused")
-	private void mergesort2(int izq, int der) {
-		if (izq < der && (der - izq) >= 1) {
-			int medio = (izq + der) / 2;
-			mergesort2(izq, medio);
-			mergesort2(medio + 1, der);
-			merge2(izq, medio, der);
-
-		}
-	}
+//	private void mergesort2(int izq, int der) {
+//		if (izq < der && (der - izq) >= 1) {
+//			int medio = (izq + der) / 2;
+//			mergesort2(izq, medio);
+//			mergesort2(medio + 1, der);
+//			merge2(izq, medio, der);
+//
+//		}
+//	}
 
 	private void merge2(int izq, int medio, int der) {
 		int i, j, x;

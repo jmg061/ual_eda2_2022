@@ -54,14 +54,12 @@ public class Main {
 		megsort2.load();
 		inicio = System.currentTimeMillis();
 		ArrayList<Jugador> ArrayListAux2 = megsort2.mergesort2();
-		DyV ObjetoAux = new DyV(ArrayListAux2);
-		ObjetoAux.mergesort();
 		fin = System.currentTimeMillis();
 		tiempo = (double) ((fin - inicio));
 		System.out.println("Tiempo => " + tiempo);
 		
 //		for (int i = 0; i < 10; i++) {
-//		System.out.println(ObjetoAux.getDatos().get(i));
+//		System.out.println(ArrayListAux2.get(i));
 //	}
 
 	}
