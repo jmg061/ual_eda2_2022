@@ -18,9 +18,9 @@ public class Main {
 		double tiempo = (double) ((fin - inicio));
 		System.out.println("Tiempo => " + tiempo);
 		
-		while (!aux.isEmpty()) {
-			System.out.println(aux.poll());
-		}
+//		while (!aux.isEmpty()) {
+//			System.out.println(aux.poll());
+//		}
 		
 		DyV megsort = new DyV();
 		System.out.println("Con MergeSort");
