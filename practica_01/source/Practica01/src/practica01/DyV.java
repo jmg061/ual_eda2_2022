@@ -125,11 +125,6 @@ public class DyV {
 
 	}
 
-
-
-	
-
-//>>>>>>> Stashed changes
 	public PriorityQueue<Jugador> reduce() {
 
 		PriorityQueue<Jugador> data = new PriorityQueue<>();
@@ -256,6 +251,7 @@ public class DyV {
 	}
 	
 
+	@SuppressWarnings("unused")
 	private void mergesort2(int izq, int der) {
 		if (izq < der && (der - izq) >= 1) {
 			int medio = (izq + der) / 2;
