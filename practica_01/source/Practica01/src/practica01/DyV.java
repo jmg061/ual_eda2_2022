@@ -125,20 +125,17 @@ public class DyV {
 
 	}
 
-	public PriorityQueue<Jugador> reduce() {
+	public PriorityQueue<Jugador> reduce() { // O(n*log(n))
 
 		PriorityQueue<Jugador> data = new PriorityQueue<>();
 		ArrayList<ArrayList<Jugador>> aux = new ArrayList<>();
 		ArrayList<ArrayList<Jugador>> dividir = null;
 		// boolean seguir=true;
 
-		while (aux.isEmpty() || aux.get(aux.size() - 1).size() != 1) {
-			// if(!aux.isEmpty())System.out.println(aux.get(0).size());
+		while (aux.isEmpty() || aux.get(aux.size() - 1).size() != 1) { //n
 			if (aux.isEmpty()) {
-				dividir = this.divide(this.datos);
+				dividir = this.divide(this.datos); // n * log (n)
 				aux.addAll(dividir);
-				//// System.out.println(dividir);
-				// System.out.println(aux);
 			} else {
 				dividir = new ArrayList<>();
 				for (int i = 0; i < aux.size(); i++) {
@@ -150,18 +147,7 @@ public class DyV {
 				aux = new ArrayList<>();
 				aux.addAll(dividir);
 			}
-			/*int tam = 0;
-			for (int i = 0; i < aux.size(); i++) {
-				tam += aux.get(i).size();
-			}*/
-			// System.out.println(tam);
-			/*
-			 * seguir=false; for(int i = 0 ; i<aux.size(); i++) if(aux.get(i).size()>1) {
-			 * seguir=true; continue; }
-			 */
 		}
-
-		// System.out.println(aux.get(0));
 
 		for (int i = 0; i < aux.size(); i++) {
 			data.add(aux.get(i).get(0));
@@ -174,20 +160,19 @@ public class DyV {
 
 	}
 
-	private ArrayList<ArrayList<Jugador>> divide(ArrayList<Jugador> jugadores) {
+	private ArrayList<ArrayList<Jugador>> divide(ArrayList<Jugador> jugadores) { // O(log(n))
 
 		ArrayList<ArrayList<Jugador>> data = new ArrayList<ArrayList<Jugador>>();
 		ArrayList<Jugador> aux = new ArrayList<Jugador>();
 
 		int mitad = jugadores.size() / 2;
-		// System.out.println(mitad);
 
-		for (int i = 0; i < mitad; i++) {
+		for (int i = 0; i < mitad; i++) { 
 			aux.add(jugadores.get(i));
 		}
 
 		data.add(new ArrayList<Jugador>(aux));
-		// System.out.println(data);
+
 		aux.clear();
 		for (; mitad < jugadores.size(); mitad++) {
 			aux.add(jugadores.get(mitad));
@@ -195,21 +180,21 @@ public class DyV {
 
 		data.add(new ArrayList<Jugador>(aux));
 		aux.clear();
-		// System.out.println(data);
+
 		return data;
 	}
 	
 	
-	public PriorityQueue<Jugador> deDiezEnDiez(){
+	public PriorityQueue<Jugador> deDiezEnDiez(){ //O(n*log(n))
 		
 		PriorityQueue<Jugador> result = new PriorityQueue<>();
 		ArrayList<PriorityQueue<Jugador>> aux = new ArrayList<>();
 		
-		for(int i = 0 ; i<this.datos.size(); i ++) {
+		for(int i = 0 ; i<this.datos.size(); i ++) { // n 
 			aux.add(new PriorityQueue<Jugador>());
 			for(int cont = 0; cont<10; cont++) {
 				if((10*i+cont)<this.datos.size())
-					aux.get(i).add(this.datos.get(10*i+cont));
+					aux.get(i).add(this.datos.get(10*i+cont)); // n * log (n)
 				//if((i+1)<this.datos.size())
 					//i++;
 			}
@@ -236,18 +221,18 @@ public class DyV {
 		return result;
 	}
 	
-	public ArrayList<Jugador> mergesort2() {
-		mergesort(0, this.datos.size()/2);
-		mergesort(this.datos.size()/2 + 1, this.datos.size() - 1);
+	public ArrayList<Jugador> mergesort2() { //O(n*log(n)) 
+		mergesort(0, this.datos.size()/2); // n*log (n)
+		mergesort(this.datos.size()/2 + 1, this.datos.size() - 1); //n*log (n)
 		ArrayList<Jugador> salida = new ArrayList<Jugador>();
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10; i++) { //10
 			salida.add(this.datos.get(i));
 		}
-		for (int j = this.datos.size()/2 + 1; j < this.datos.size()/2 + 11; j++) {
+		for (int j = this.datos.size()/2 + 1; j < this.datos.size()/2 + 11; j++) { //10
 			salida.add(this.datos.get(j));
 		}
 		DyV ObjetoAux = new DyV(salida);
-		ObjetoAux.mergesort();
+		ObjetoAux.mergesort(); //20 
 		return ObjetoAux.datos;
 		
 	}
