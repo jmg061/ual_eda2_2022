@@ -1,6 +1,7 @@
 package practica01;
 
 import java.util.ArrayList;
+import java.util.Collections;
 //import java.util.Collections;
 import java.util.PriorityQueue;
 
@@ -40,28 +41,28 @@ public class Main {
 		System.out.println("Con DiezEnDiez");
 		dediezendiez.load();
 		inicio = System.currentTimeMillis();
-		/*PriorityQueue<Jugador>*/ aux = dediezendiez.deDiezEnDiez();
+		/*PriorityQueue<Jugador>*/ aux = new PriorityQueue<>(Collections.reverseOrder());
+		aux.addAll(dediezendiez.deDiezEnDiez());
 		fin = System.currentTimeMillis();
 		tiempo = (double) ((fin - inicio));
 		System.out.println("Tiempo => " + tiempo);
 		
-//		while (!aux.isEmpty()) {
-//			System.out.println(aux.poll());
-//		}
+		while (!aux.isEmpty()) {
+			System.out.println(aux.poll());
+		}
 
 		DyV megsort2 = new DyV();
 		System.out.println("Con MergeSort2");
 		megsort2.load();
 		inicio = System.currentTimeMillis();
+		@SuppressWarnings("unused")
 		ArrayList<Jugador> ArrayListAux2 = megsort2.mergesort2();
-		DyV ObjetoAux = new DyV(ArrayListAux2);
-		ObjetoAux.mergesort();
 		fin = System.currentTimeMillis();
 		tiempo = (double) ((fin - inicio));
 		System.out.println("Tiempo => " + tiempo);
 		
 //		for (int i = 0; i < 10; i++) {
-//		System.out.println(ObjetoAux.getDatos().get(i));
+//		System.out.println(ArrayListAux2.get(i));
 //	}
 
 	}
