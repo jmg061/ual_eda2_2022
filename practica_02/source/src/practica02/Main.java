@@ -16,8 +16,8 @@ public class Main {
 		Greedy greedy = new Greedy();
 
 		greedy.load("graphEDAland.txt");
-		System.out.println(greedy.getNet());
-		
+		//System.out.println(greedy.getNet());
+		greedy.ConexoBase();
 		//new DibujarGrafo();
 
 	}
