@@ -7,6 +7,14 @@ public class Pavimento implements Comparable<Pavimento>{
 	private double coste;
 	private int caminos;
 	
+public Pavimento(String inicio, String fin, double coste) {
+		
+		this.inicio=inicio;
+		this.fin=fin;
+		this.coste=coste;
+		this.caminos=0;
+		
+	}
 	public Pavimento(String inicio, String fin, double coste, int caminos) {
 		
 		this.inicio=inicio;
@@ -40,7 +48,7 @@ public class Pavimento implements Comparable<Pavimento>{
 	
 	@Override
 	public String toString() {
-		return "Inicio: "+this.inicio + " Fin: "+this.fin+" Coste: "+this.coste+" Caminos: "+this.caminos;
+		return "Inicio: "+this.inicio + " Fin: "+this.fin+" Coste: "+this.coste;//+" Caminos: "+this.caminos;
 	}
 
 	public String getInicio() {

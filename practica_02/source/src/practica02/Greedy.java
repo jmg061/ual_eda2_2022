@@ -5,18 +5,22 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Map.Entry;
+import java.util.PriorityQueue;
 //import java.util.PriorityQueue;
 import java.util.TreeMap;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 
 public class Greedy {
 	
 	private Network<String> net;
-	private LinkedHashMap<String, LinkedHashMap<String, Double>> edaaux = new LinkedHashMap<>();
+	//private LinkedHashMap<String, LinkedHashMap<String, Double>> edaaux;// = new LinkedHashMap<>();
 	
 	public Greedy() {
 		
 		net = new Network<>();
+		//edaaux = new LinkedHashMap<>();
 		
 	}
 	
@@ -79,14 +83,10 @@ public class Greedy {
 		return net;
 	}
 	
-	public void ConexoBase() {
-		//Primero vamos a obtener la arista de menor coste
-		//int menor = Integer.MAX_VALUE;
-		//String inicio;
-		//PriorityQueue<Pavimento> pq = new PriorityQueue<>();
+	private Pavimento obtenerMenorCoste() {
 		
-		LinkedHashMap<String, Double> aux;
-		Double peso;
+		//LinkedHashMap<String, Double> aux;
+		//Double peso;
 		Pavimento minimo = new Pavimento();
 		
 		//Obtenemos la arista de menor coste
@@ -112,26 +112,50 @@ public class Greedy {
 				
 			}
 		}
-			
-		System.out.println(minimo);
 		
-		for(Entry<String, TreeMap<String, Double>> entry : this.net.getAdjacencyMap().entrySet()) {
-			for(Entry<String, Double> entry2 : entry.getValue().entrySet()) {
-				aux = this.edaaux.get(entry.getKey());
-				if(aux == null) {
-					edaaux.put(entry.getKey(), aux = new LinkedHashMap<>());
-				}
-				peso = aux.get(entry2.getKey());
-				if(peso == null) {
-					aux.put(entry2.getKey(), entry2.getValue());
-				}
-				
-				//edaaux.add(entry.getKey(),  new TreeMap<String, Double>());
-				
+		return minimo;
+		
+	}
+	
+	public void ConexoBase() {
+		
+		Pavimento inicio = obtenerMenorCoste();
+		PriorityQueue<Pavimento> result = new PriorityQueue<>();
+		LinkedList<String> noVisitados = new LinkedList<>();
+		//LinkedHashMap<String, Double> aux = new LinkedHashMap<>();
+		ArrayList<Pavimento> aux= new ArrayList<>();
+		Pavimento pav = null;
+		
+		for(String ciudad : this.net.getAdjacencyMap().keySet())
+			noVisitados.add(ciudad);
+		
+		while(!noVisitados.isEmpty()) {
+			if(inicio!=null) {
+				TreeMap<String, Double> tm = this.net.getAdjacencyMap().get(inicio.getInicio());
+				for(Entry<String, Double> entry : tm.entrySet())
+					result.add(new Pavimento(inicio.getInicio(), entry.getKey(), entry.getValue(), tm.size()));
+				noVisitados.remove(inicio.getInicio());
+				//aux.put(inicio.getInicio(), inicio.getCoste());
+				inicio=null;
+			}else {
+				//System.out.println("estoy dentro");
+				//Pavimento pav = result.poll();
+				//System.out.println(pav.getFin());
+				if(!noVisitados.contains(pav.getFin())) continue;
+				TreeMap<String, Double> tm = this.net.getAdjacencyMap().get(pav.getFin());
+				//System.out.println(tm);
+				for(Entry<String, Double> entry : tm.entrySet())
+					result.add(new Pavimento(pav.getFin(), entry.getKey(), entry.getValue()));
+				noVisitados.remove(pav.getFin());
+				//System.out.println(result);
 			}
-			
+			while(!result.isEmpty()) {
+				aux.add(result.poll());
+			}
+			pav=aux.get(aux.size()-1);
+			for(Pavimento city : aux)
+			System.out.println(city);
 		}
-		
 	}
 
 }
