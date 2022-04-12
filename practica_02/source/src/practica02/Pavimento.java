@@ -37,6 +37,8 @@ public Pavimento(String inicio, String fin, double coste) {
 			return true;
 		if(this.fin.equals(((Pavimento)o).inicio) && this.inicio.equals(((Pavimento)o).fin))
 			return true;
+		if(this.inicio.equals(((Pavimento)o).fin) && this.fin.equals(((Pavimento)o).inicio))
+			return true;
 		return false;
 	}
 	

@@ -119,38 +119,43 @@ public class Greedy {
 	
 	public void ConexoBase() {
 		
-		Pavimento inicio = obtenerMenorCoste();
+		Pavimento pav = obtenerMenorCoste();
 		PriorityQueue<Pavimento> result = new PriorityQueue<>();
 		LinkedList<String> noVisitados = new LinkedList<>();
 		//LinkedHashMap<String, Double> aux = new LinkedHashMap<>();
 		ArrayList<Pavimento> aux= new ArrayList<>();
-		Pavimento pav = null;
+		//Pavimento pav = null;
 		
 		for(String ciudad : this.net.getAdjacencyMap().keySet())
 			noVisitados.add(ciudad);
 		
+		TreeMap<String, Double> tm = this.net.getAdjacencyMap().get(pav.getInicio());
+		for(Entry<String, Double> entry : tm.entrySet())
+			result.add(new Pavimento(pav.getInicio(), entry.getKey(), entry.getValue(), tm.size()));
+		noVisitados.remove(pav.getInicio());
+		//aux.put(inicio.getInicio(), inicio.getCoste());
+		//inicio=null;
+		
 		while(!noVisitados.isEmpty()) {
-			if(inicio!=null) {
-				TreeMap<String, Double> tm = this.net.getAdjacencyMap().get(inicio.getInicio());
-				for(Entry<String, Double> entry : tm.entrySet())
-					result.add(new Pavimento(inicio.getInicio(), entry.getKey(), entry.getValue(), tm.size()));
-				noVisitados.remove(inicio.getInicio());
-				//aux.put(inicio.getInicio(), inicio.getCoste());
-				inicio=null;
-			}else {
 				//System.out.println("estoy dentro");
 				//Pavimento pav = result.poll();
 				//System.out.println(pav.getFin());
 				if(!noVisitados.contains(pav.getFin())) continue;
-				TreeMap<String, Double> tm = this.net.getAdjacencyMap().get(pav.getFin());
+				/*TreeMap<String, Double>*/ tm = this.net.getAdjacencyMap().get(pav.getFin());
 				//System.out.println(tm);
-				for(Entry<String, Double> entry : tm.entrySet())
+				for(Entry<String, Double> entry : tm.entrySet()) {
+					//Pavimento pavaux = new Pavimento(pav.getFin(), entry.getKey(), entry.getValue());
+					
 					result.add(new Pavimento(pav.getFin(), entry.getKey(), entry.getValue()));
+				}
 				noVisitados.remove(pav.getFin());
 				//System.out.println(result);
-			}
+			
 			while(!result.isEmpty()) {
-				aux.add(result.poll());
+				if(!aux.contains(result.peek()))
+						aux.add(result.poll());
+				else
+					result.poll();
 			}
 			pav=aux.get(aux.size()-1);
 			for(Pavimento city : aux)
