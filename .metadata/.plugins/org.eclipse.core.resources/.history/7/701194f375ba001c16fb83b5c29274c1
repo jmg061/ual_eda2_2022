@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Map.Entry;
 import java.util.PriorityQueue;
-import java.util.Queue;
 //import java.util.PriorityQueue;
 import java.util.TreeMap;
 import java.util.ArrayList;
@@ -125,7 +124,6 @@ public class Greedy {
 		result.add(pav);
 		PriorityQueue<Pavimento> cola = new PriorityQueue<>();
 		LinkedList<String> noVisitados = new LinkedList<>();
-		Queue<String> porVisitar = new LinkedList<>();
 		//LinkedHashMap<String, Double> aux = new LinkedHashMap<>();
 		
 		//Pavimento pav = null;
@@ -143,26 +141,24 @@ public class Greedy {
 		//System.out.println(cola);
 		
 		noVisitados.remove(pav.getInicio());
-		while(!cola.isEmpty())
-			porVisitar.add(cola.poll().getFin());
 		//aux.put(inicio.getInicio(), inicio.getCoste());
 		//inicio=null;
 		
 		//ciudad = cola.poll().getFin();
-		//cola.poll();
+		cola.poll();
 		
 		while(!noVisitados.isEmpty()) {
 				//System.out.println("estoy dentro");
 				//Pavimento pav = result.poll();
 				//System.out.println(pav.getFin());
-				/*if(!noVisitados.contains(pav.getFin())) {
+				if(!noVisitados.contains(pav.getFin())) {
 					
 					pav=cola.poll();
 					if(!result.contains(pav))
 						result.add(pav);
 					continue;
-				}*/	
-				/*TreeMap<String, Double>*/ redCarreteras = this.net.getAdjacencyMap().get(porVisitar.poll());
+				}
+				/*TreeMap<String, Double>*/ redCarreteras = this.net.getAdjacencyMap().get(pav.getFin());
 				//System.out.println(tm);
 				for(Entry<String, Double> entry : redCarreteras.entrySet()) {
 					//Pavimento pavaux = new Pavimento(pav.getFin(), entry.getKey(), entry.getValue());
@@ -192,48 +188,9 @@ public class Greedy {
 			//for(Pavimento city : aux)
 			//System.out.println(city);
 		}
-		System.out.println(result.size());
+		/*System.out.println(result.size());
 		for(Pavimento aux : result)
-			System.out.println(aux);
-	}
-	
-public void ConexoBase2() {
-		
-		ArrayList<Pavimento> result= new ArrayList<>();
-		Pavimento pav = obtenerMenorCoste();
-		result.add(pav);
-		PriorityQueue<Pavimento> cola = new PriorityQueue<>();
-		LinkedList<String> noVisitados = new LinkedList<>();
-		Queue<String> porVisitar = new LinkedList<>();
-		
-		for(String city : this.net.getAdjacencyMap().keySet())
-			noVisitados.add(city);
-		
-		TreeMap<String, Double> redCarreteras = this.net.getAdjacencyMap().get(pav.getInicio());
-		for(Entry<String, Double> entry : redCarreteras.entrySet())
-			cola.add(new Pavimento(pav.getInicio(), entry.getKey(), entry.getValue(), redCarreteras.size()));
-		
-		noVisitados.remove(pav.getInicio());
-		while(!cola.isEmpty())
-			porVisitar.add(cola.poll().getFin());
-
-		
-		while(!noVisitados.isEmpty()) {
-			
-			redCarreteras = this.net.getAdjacencyMap().get(porVisitar.poll());
-			
-			for(Entry<String, Double> entry : redCarreteras.entrySet())
-				cola.add(new Pavimento(pav.getInicio(), entry.getKey(), entry.getValue(), redCarreteras.size()));
-			
-			noVisitados.remove(pav.getInicio());
-			
-			while(!cola.isEmpty())
-				porVisitar.add(cola.poll().getFin());
-			
-		}
-		System.out.println(result.size());
-		for(Pavimento aux : result)
-			System.out.println(aux);
+			System.out.println(aux);*/
 	}
 
 }
