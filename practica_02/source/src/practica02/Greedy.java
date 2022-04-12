@@ -5,70 +5,71 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Map.Entry;
+
 import java.util.PriorityQueue;
 //import java.util.PriorityQueue;
 import java.util.TreeMap;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
+
 import java.util.LinkedList;
 
 public class Greedy {
-	
+
 	private Network<String> net;
-	//private LinkedHashMap<String, LinkedHashMap<String, Double>> edaaux;// = new LinkedHashMap<>();
-	
+	// private LinkedHashMap<String, LinkedHashMap<String, Double>> edaaux;// = new
+	// LinkedHashMap<>();
+
 	public Greedy() {
-		
+
 		net = new Network<>();
-		//edaaux = new LinkedHashMap<>();
-		
+		// edaaux = new LinkedHashMap<>();
+
 	}
-	
+
 	public void load(String file) {
-		
+
 		BufferedReader br = null;
 		String line;
 		String[] items = null;
 		int cont;
-		
+
 		try {
-			
+
 			br = new BufferedReader(new FileReader(file));
-			
+
 			cont = Integer.parseInt(br.readLine());
-			
-			
-			if(cont==0) 
+
+			if (cont == 0)
 				net.setDirected(false);
-			
-				while((line = br.readLine()) != null) {
-					
-					cont = Integer.parseInt(line);
-					
-					for(int i = 0; i<cont; i++) {
-						//line=br.readLine();
-						//System.out.println(line +" cont: "+cont+" i: " + i);
-						net.addVertex(br.readLine());
-						
-					}
-					
-					cont = Integer.parseInt(br.readLine());
-					
-					for(int i = 0; i<cont; i++) {
-						
-						line = br.readLine();
-						items = line.split(" ");
-						//for(String word : items)
-							//System.out.println(word);
-						net.addEdge(items[0], items[1], Integer.parseInt(items[2]));
-						
-					}
-					items = null;
-					
+
+			while ((line = br.readLine()) != null) {
+
+				cont = Integer.parseInt(line);
+
+				for (int i = 0; i < cont; i++) {
+					// line=br.readLine();
+					// System.out.println(line +" cont: "+cont+" i: " + i);
+					net.addVertex(br.readLine());
+
 				}
-		
+
+				cont = Integer.parseInt(br.readLine());
+
+				for (int i = 0; i < cont; i++) {
+
+					line = br.readLine();
+					items = line.split(" ");
+					// for(String word : items)
+					// System.out.println(word);
+					net.addEdge(items[0], items[1], Integer.parseInt(items[2]));
+
+				}
+				items = null;
+
+			}
+
 			br.close();
-			
+
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -76,86 +77,179 @@ public class Greedy {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	public Network<String> getNet() {
 		return net;
 	}
-	
+
 	private Pavimento obtenerMenorCoste() {
-		
-		//LinkedHashMap<String, Double> aux;
-		//Double peso;
+
+		// LinkedHashMap<String, Double> aux;
+		// Double peso;
 		Pavimento minimo = new Pavimento();
-		
-		//Obtenemos la arista de menor coste
-		for(Entry<String, TreeMap<String, Double>> entry : this.net.getAdjacencyMap().entrySet()) {
-			for(Entry<String, Double> entry2 : entry.getValue().entrySet()) {
-				
-				if(entry2.getValue()<minimo.getCoste()) {
-					//if(entry.getValue().size()<minimo.getCaminos())
+
+		// Obtenemos la arista de menor coste
+		for (Entry<String, TreeMap<String, Double>> entry : this.net.getAdjacencyMap().entrySet()) {
+			for (Entry<String, Double> entry2 : entry.getValue().entrySet()) {
+
+				if (entry2.getValue() < minimo.getCoste()) {
+					// if(entry.getValue().size()<minimo.getCaminos())
 					minimo.setInicio(entry.getKey());
 					minimo.setFin(entry2.getKey());
 					minimo.setCoste(entry2.getValue());
 					minimo.setCaminos(entry.getValue().size());
 				}
-				
-				if(entry2.getValue()==minimo.getCoste()) {
-					if(entry.getValue().size()<minimo.getCaminos())
-					minimo.setInicio(entry.getKey());
+
+				if (entry2.getValue() == minimo.getCoste()) {
+					if (entry.getValue().size() < minimo.getCaminos())
+						minimo.setInicio(entry.getKey());
 					minimo.setFin(entry2.getKey());
 					minimo.setCoste(entry2.getValue());
 					minimo.setCaminos(entry.getValue().size());
 				}
-					
-				
+
 			}
 		}
-		
+
 		return minimo;
-		
+
 	}
-	
+
 	public void ConexoBase() {
-		
-		ArrayList<Pavimento> result= new ArrayList<>();
+
+		ArrayList<Pavimento> result = new ArrayList<>();
 		Pavimento pav = obtenerMenorCoste();
 		PriorityQueue<Pavimento> cola = new PriorityQueue<>();
 		LinkedList<String> Nodos = new LinkedList<>();
 		LinkedList<String> Visitados = new LinkedList<>();
 
-		
-		for(String city : this.net.getAdjacencyMap().keySet())
+		for (String city : this.net.getAdjacencyMap().keySet())
 			Nodos.add(city);
-		
+
 		Visitados.add(pav.getInicio());
-		
+
 		for (String ciudad : this.net.getAdjacencyMap().get(pav.getFin()).keySet()) {
-			if (Visitados.contains(ciudad)) continue;
+			if (Visitados.contains(ciudad))
+				continue;
 			Pavimento aux = new Pavimento(pav.getFin(), ciudad, this.net.getWeight(pav.getFin(), ciudad));
 			cola.add(aux);
-			}
-		
-		
-		
-		while (Nodos.size() != Visitados.size()){
-			if (!Visitados.contains(pav.getFin())){
-			Visitados.add(pav.getFin());
-			result.add(pav);
-			for (String ciudad : this.net.getAdjacencyMap().get(pav.getFin()).keySet()) {
-				if (Visitados.contains(ciudad)) continue;
-				Pavimento aux = new Pavimento(pav.getFin(), ciudad, this.net.getWeight(pav.getFin(), ciudad));
-				cola.add(aux);
+		}
+
+		while (Nodos.size() != Visitados.size()) {
+			if (!Visitados.contains(pav.getFin())) {
+				Visitados.add(pav.getFin());
+				result.add(pav);
+				for (String ciudad : this.net.getAdjacencyMap().get(pav.getFin()).keySet()) {
+					if (Visitados.contains(ciudad))
+						continue;
+					Pavimento aux = new Pavimento(pav.getFin(), ciudad, this.net.getWeight(pav.getFin(), ciudad));
+					cola.add(aux);
 				}
 			}
 			pav = cola.poll();
+
+		}
+
+		System.out.println(result.size());
+		for (Pavimento aux : result)
+			System.out.println(aux);
+	}
+
+	public void ConexoSinPQ() {
+
+		ArrayList<Pavimento> result = new ArrayList<>();
+		Pavimento pav = obtenerMenorCoste();
+		LinkedList<Pavimento> cola = new LinkedList<>();
+		LinkedList<String> Nodos = new LinkedList<>();
+		LinkedList<String> Visitados = new LinkedList<>();
+
+		for (String city : this.net.getAdjacencyMap().keySet())
+			Nodos.add(city);
+
+		Visitados.add(pav.getInicio());
+
+		for (String ciudad : this.net.getAdjacencyMap().get(pav.getFin()).keySet()) {
+			if (Visitados.contains(ciudad))
+				continue;
+			Pavimento aux = new Pavimento(pav.getFin(), ciudad, this.net.getWeight(pav.getFin(), ciudad));
+			cola.add(aux);
+			
+			mergesort(cola);
+		}
+
+		while (Nodos.size() != Visitados.size()) {
+			if (!Visitados.contains(pav.getFin())) {
+				Visitados.add(pav.getFin());
+				result.add(pav);
+				for (String ciudad : this.net.getAdjacencyMap().get(pav.getFin()).keySet()) {
+					if (Visitados.contains(ciudad))
+						continue;
+					Pavimento aux = new Pavimento(pav.getFin(), ciudad, this.net.getWeight(pav.getFin(), ciudad));
+					cola.add(aux);
+					mergesort(cola);
+				}
+			}
+			pav = cola.poll();
+
+		}
+
+		System.out.println(result.size());
+		for (Pavimento aux : result)
+			System.out.println(aux);
+	}
+
+	public void mergesort(LinkedList<Pavimento> datos) {
+		mergesort(datos, 0, datos.size() - 1);
+		//return datos;
+	}
+	
+
+	private void mergesort(LinkedList<Pavimento> datos, int izq, int der) { // O(n*log(n))
+		if (izq < der && (der - izq) >= 1) {
+			int medio = (izq + der) / 2;
+			mergesort(datos, izq, medio); // log(n)
+			mergesort(datos, medio + 1, der); // log(n)
+			merge(datos, izq, medio, der); // n 
 			
 		}
 		
-		System.out.println(result.size());
-		for(Pavimento aux : result)
-			System.out.println(aux);
+		//return datos;
+	}
+
+	private void merge(LinkedList<Pavimento> datos, int izq, int medio, int der) {
+		int i, j, x;
+		LinkedList<Pavimento> aux = new LinkedList<Pavimento>();
+
+		j = medio + 1;
+		x = izq;
+
+		while (izq <= medio && j <= der) {
+			if (datos.get(izq).getCoste() > datos.get(j).getCoste()) {
+				aux.add(datos.get(izq));
+				izq++;
+			} else {
+				aux.add(datos.get(j));
+				j++;
+			}
+		}
+
+		while (izq <= medio) {
+			aux.add(datos.get(izq));
+			izq++;
+
+		}
+		while (j <= der) {
+			aux.add(datos.get(j));
+			j++;
+		}
+		i = 0;
+		while (i < aux.size()) {
+			datos.set(x, aux.get(i++));
+			x++;
+		}
+
 	}
 
 }

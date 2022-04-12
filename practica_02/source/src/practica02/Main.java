@@ -18,6 +18,7 @@ public class Main {
 		greedy.load("graphEDAland.txt");
 		//System.out.println(greedy.getNet());
 		greedy.ConexoBase();
+		greedy.ConexoSinPQ();
 		//new DibujarGrafo();
 
 	}
