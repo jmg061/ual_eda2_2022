@@ -133,12 +133,9 @@ public class Greedy {
 		
 		for (String ciudad : this.net.getAdjacencyMap().get(pav.getFin()).keySet()) {
 			if (Visitados.contains(ciudad)) continue;
-			Pavimento aux = new Pavimento();
-			aux.setInicio(pav.getFin());
-			aux.setFin(ciudad);
-			aux.setCoste(this.net.getWeight(pav.getFin(), ciudad));
+			Pavimento aux = new Pavimento(pav.getFin(), ciudad, this.net.getWeight(pav.getFin(), ciudad));
 			cola.add(aux);
-		}
+			}
 		
 		
 		
