@@ -119,48 +119,69 @@ public class Greedy {
 	
 	public void ConexoBase() {
 		
+		ArrayList<Pavimento> result= new ArrayList<>();
 		Pavimento pav = obtenerMenorCoste();
-		PriorityQueue<Pavimento> result = new PriorityQueue<>();
+		//result.add(pav);
+		PriorityQueue<Pavimento> cola = new PriorityQueue<>();
 		LinkedList<String> noVisitados = new LinkedList<>();
 		//LinkedHashMap<String, Double> aux = new LinkedHashMap<>();
-		ArrayList<Pavimento> aux= new ArrayList<>();
+		
 		//Pavimento pav = null;
+		//String ciudad = "";
 		
-		for(String ciudad : this.net.getAdjacencyMap().keySet())
-			noVisitados.add(ciudad);
+		for(String city : this.net.getAdjacencyMap().keySet())
+			noVisitados.add(city);
 		
-		TreeMap<String, Double> tm = this.net.getAdjacencyMap().get(pav.getInicio());
-		for(Entry<String, Double> entry : tm.entrySet())
-			result.add(new Pavimento(pav.getInicio(), entry.getKey(), entry.getValue(), tm.size()));
+		//System.out.println(noVisitados);
+		
+		TreeMap<String, Double> redCarreteras = this.net.getAdjacencyMap().get(pav.getInicio());
+		for(Entry<String, Double> entry : redCarreteras.entrySet())
+			cola.add(new Pavimento(pav.getInicio(), entry.getKey(), entry.getValue(), redCarreteras.size()));
+		
+		//System.out.println(cola);
+		
 		noVisitados.remove(pav.getInicio());
 		//aux.put(inicio.getInicio(), inicio.getCoste());
 		//inicio=null;
+		
+		//ciudad = cola.poll().getFin();
 		
 		while(!noVisitados.isEmpty()) {
 				//System.out.println("estoy dentro");
 				//Pavimento pav = result.poll();
 				//System.out.println(pav.getFin());
-				if(!noVisitados.contains(pav.getFin())) continue;
-				/*TreeMap<String, Double>*/ tm = this.net.getAdjacencyMap().get(pav.getFin());
+				if(!noVisitados.contains(pav.getFin())) {
+					pav=cola.poll();
+					continue;
+				}
+				/*TreeMap<String, Double>*/ redCarreteras = this.net.getAdjacencyMap().get(pav.getFin());
 				//System.out.println(tm);
-				for(Entry<String, Double> entry : tm.entrySet()) {
+				for(Entry<String, Double> entry : redCarreteras.entrySet()) {
 					//Pavimento pavaux = new Pavimento(pav.getFin(), entry.getKey(), entry.getValue());
 					
-					result.add(new Pavimento(pav.getFin(), entry.getKey(), entry.getValue()));
+					cola.add(new Pavimento(pav.getFin(), entry.getKey(), entry.getValue()));
 				}
+				
+				//System.out.println(cola);
+				
 				noVisitados.remove(pav.getFin());
 				//System.out.println(result);
 			
-			while(!result.isEmpty()) {
-				if(!aux.contains(result.peek()))
-						aux.add(result.poll());
+			/*while(!cola.isEmpty()) {
+				if(!aux.contains(cola.peek()))
+						aux.add(cola.poll());
 				else
-					result.poll();
+					cola.poll();
 			}
-			pav=aux.get(aux.size()-1);
-			for(Pavimento city : aux)
-			System.out.println(city);
+			pav=aux.get(aux.size()-1);*/
+			pav=cola.poll();
+			result.add(pav);
+			//for(Pavimento city : aux)
+			//System.out.println(city);
 		}
+		System.out.println(result.size());
+		for(Pavimento aux : result)
+			System.out.println(aux);
 	}
 
 }

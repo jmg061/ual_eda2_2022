@@ -1,0 +1,20 @@
+INDEX VERSION 1.131+I:\Eclipses\GIPP2020EclipseFoundation\workspace\ual_eda2_2022\.metadata\.plugins\org.eclipse.jdt.core
+2903271831.index
+3273286772.index
+2503537908.index
+804636697.index
+3600544268.index
+642055422.index
+307756271.index
+2630862841.index
+1255047821.index
+3601872650.index
+3511041343.index
+2154509799.index
+2537235602.index
+516038104.index
+10556015.index
+2885394731.index
+264939215.index
+555013871.index
+4182800083.index
