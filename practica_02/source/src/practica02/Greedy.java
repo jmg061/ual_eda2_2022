@@ -117,7 +117,7 @@ public class Greedy {
 
 	}
 
-	public void ConexoBase() {
+	public ArrayList<Pavimento> ConexoBase() {
 
 		ArrayList<Pavimento> result = new ArrayList<>();
 		Pavimento pav = obtenerMenorCoste();
@@ -152,12 +152,10 @@ public class Greedy {
 
 		}
 
-		System.out.println(result.size());
-		for (Pavimento aux : result)
-			System.out.println(aux);
+		return result;
 	}
 
-	public void ConexoSinPQ() {
+	public ArrayList<Pavimento> ConexoSinPQ() {
 
 		ArrayList<Pavimento> result = new ArrayList<>();
 		Pavimento pav = obtenerMenorCoste();
@@ -195,12 +193,10 @@ public class Greedy {
 
 		}
 
-		System.out.println(result.size());
-		for (Pavimento aux : result)
-			System.out.println(aux);
+		return result;
 	}
 	
-public void NoConexo() {
+public ArrayList<Pavimento> NoConexo() {
 		
 		ArrayList<Pavimento> result= new ArrayList<>();
 		Pavimento pav = new Pavimento();
@@ -226,9 +222,8 @@ public void NoConexo() {
 				if (!Visitados.contains(pav.getInicio())) Visitados.add(pav.getInicio());
 			}
 		}
-		System.out.println(result.size());
-		for(Pavimento aux : result)
-			System.out.println(aux);
+		
+		return result;
 	}
 	public void mergesort(LinkedList<Pavimento> datos) {
 		mergesort(datos, 0, datos.size() - 1);
