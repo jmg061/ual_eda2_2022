@@ -184,7 +184,6 @@ public void NoConexo() {
 				if (!Visitados.contains(pav.getInicio())) Visitados.add(pav.getInicio());
 			}
 		}
-		
 		System.out.println(result.size());
 		for(Pavimento aux : result)
 			System.out.println(aux);
