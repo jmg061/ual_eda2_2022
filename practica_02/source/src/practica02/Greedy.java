@@ -157,5 +157,39 @@ public class Greedy {
 		for(Pavimento aux : result)
 			System.out.println(aux);
 	}
+	
+public void NoConexo() {
+		
+		ArrayList<Pavimento> result= new ArrayList<>();
+		Pavimento pav = new Pavimento();
+		PriorityQueue<Pavimento> cola = new PriorityQueue<>();
+		LinkedList<String> Nodos = new LinkedList<>();
+		LinkedList<String> Visitados = new LinkedList<>();
 
+		
+		for(String city : this.net.getAdjacencyMap().keySet()) {
+			Nodos.add(city);
+			
+			for (String ciudad : this.net.getAdjacencyMap().get(city).keySet()) {
+				Pavimento aux = new Pavimento(city, ciudad, this.net.getWeight(city, ciudad));
+				cola.add(aux);
+				}
+		}
+
+		while (Nodos.size() != Visitados.size()){
+			pav = cola.poll();
+			if (!Visitados.contains(pav.getFin()) || !Visitados.contains(pav.getInicio())) {
+				result.add(pav);
+				if (!Visitados.contains(pav.getFin())) Visitados.add(pav.getFin());
+				if (!Visitados.contains(pav.getInicio())) Visitados.add(pav.getInicio());
+			}
+		}
+		
+		System.out.println(result.size());
+		for(Pavimento aux : result)
+			System.out.println(aux);
+	}
 }
+
+
+
