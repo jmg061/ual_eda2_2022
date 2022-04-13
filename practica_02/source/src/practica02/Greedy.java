@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Greedy {
+	private LinkedList<String> Nodos = new LinkedList<String>();
 
 	private Network<String> net;
 	// private LinkedHashMap<String, LinkedHashMap<String, Double>> edaaux;// = new
@@ -23,6 +24,13 @@ public class Greedy {
 
 		net = new Network<>();
 		// edaaux = new LinkedHashMap<>();
+
+	}
+	
+	public void InicializarNodos() {
+		this.Nodos.clear();
+		for (String city : this.net.getAdjacencyMap().keySet())
+			this.Nodos.add(city);
 
 	}
 
@@ -125,9 +133,6 @@ public class Greedy {
 		LinkedList<String> Nodos = new LinkedList<>();
 		LinkedList<String> Visitados = new LinkedList<>();
 
-		for (String city : this.net.getAdjacencyMap().keySet())
-			Nodos.add(city);
-
 		Visitados.add(pav.getInicio());
 
 		for (String ciudad : this.net.getAdjacencyMap().get(pav.getFin()).keySet()) {
@@ -160,11 +165,8 @@ public class Greedy {
 		ArrayList<Pavimento> result = new ArrayList<>();
 		Pavimento pav = obtenerMenorCoste();
 		LinkedList<Pavimento> cola = new LinkedList<>();
-		LinkedList<String> Nodos = new LinkedList<>();
 		LinkedList<String> Visitados = new LinkedList<>();
 
-		for (String city : this.net.getAdjacencyMap().keySet())
-			Nodos.add(city);
 
 		Visitados.add(pav.getInicio());
 
@@ -200,19 +202,18 @@ public ArrayList<Pavimento> NoConexo() {
 		
 		ArrayList<Pavimento> result= new ArrayList<>();
 		Pavimento pav = new Pavimento();
-		PriorityQueue<Pavimento> cola = new PriorityQueue<>();
-		LinkedList<String> Nodos = new LinkedList<>();
+		LinkedList<Pavimento> cola = new LinkedList<Pavimento>();
 		LinkedList<String> Visitados = new LinkedList<>();
 
 		
-		for(String city : this.net.getAdjacencyMap().keySet()) {
-			Nodos.add(city);
-			
+		for(String city : this.Nodos) {
 			for (String ciudad : this.net.getAdjacencyMap().get(city).keySet()) {
 				Pavimento aux = new Pavimento(city, ciudad, this.net.getWeight(city, ciudad));
 				cola.add(aux);
 				}
 		}
+		
+		mergesort(cola);
 
 		while (Nodos.size() != Visitados.size()){
 			pav = cola.poll();
@@ -225,6 +226,7 @@ public ArrayList<Pavimento> NoConexo() {
 		
 		return result;
 	}
+
 	public void mergesort(LinkedList<Pavimento> datos) {
 		mergesort(datos, 0, datos.size() - 1);
 		//return datos;
