@@ -3,8 +3,11 @@ package practica02;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.Map.Entry;
 import java.util.PriorityQueue;
 import java.util.TreeMap;
@@ -363,8 +366,23 @@ public class Greedy {
 			interno.put(pav.getFin(), (int) Math.floor(Math.random() * (490 - 90 + 1) + 90));
 
 		}
+
+		for (int i = 1; i <= ciudades; i++) {
+			for (Entry<String, Integer> entry : mapa.get(String.valueOf(i)).entrySet()) {
+				red += i + " " + entry.getKey() + " " + entry.getValue() + "\n";
+			}
+		}
+
+		red = red.substring(0, red.length() - 1);
+
+		try {
+			bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("MiRed"), StandardCharsets.UTF_8));
+			bw.write(red);
+			bw.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
-
-
-
