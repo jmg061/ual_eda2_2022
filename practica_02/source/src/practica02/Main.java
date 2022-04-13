@@ -1,14 +1,6 @@
 package practica02;
 
-import java.awt.Container;
-import java.awt.Graphics;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.swing.JFrame;
 
 public class Main {
 
@@ -41,11 +33,8 @@ public class Main {
 		for (Pavimento pavimento : resultados) {
 			System.out.println("Inicio: " + pavimento.getInicio() + " Fin: " + pavimento.getFin() + "  Coste:" + pavimento.getCoste());
 		}
-		
-//		Greedy greedy = new Greedy();
-//		greedy.generadorDeRedes(false, 100, 200);
+
+		greedy.generadorDeRedes(false, 100, 200);
 
 	}
-
 }
-

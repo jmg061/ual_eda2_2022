@@ -1,13 +1,12 @@
 package practica02;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Map.Entry;
-import java.io.BufferedWriter;
 import java.util.PriorityQueue;
-//import java.util.PriorityQueue;
 import java.util.TreeMap;
 import java.util.ArrayList;
 
@@ -31,6 +30,10 @@ public class Greedy {
 
 	}
 
+	/**
+	 * Este metodo nos carga los datos con los que vamos a trabajar
+	 * @param file archivo donde se encuentran los datos con los que vamos a trabajar
+	 */
 	public void load(String file) {
 
 		BufferedReader br = null;
