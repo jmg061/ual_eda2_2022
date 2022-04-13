@@ -10,7 +10,7 @@ public class Main {
 		ArrayList<Pavimento> resultados = new ArrayList<Pavimento>();
 
 		greedy.load("graphEDAland.txt");
-		System.out.println(greedy.getNet());
+//		System.out.println(greedy.getNet());
 		
 		System.out.println();
 		System.out.println("ConexoConPQ");
