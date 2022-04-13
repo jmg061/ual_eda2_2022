@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Map.Entry;
-
+import java.io.BufferedWriter;
 import java.util.PriorityQueue;
 //import java.util.PriorityQueue;
 import java.util.TreeMap;
@@ -17,13 +17,10 @@ public class Greedy {
 	private LinkedList<String> Nodos = new LinkedList<String>();
 
 	private Network<String> net;
-	// private LinkedHashMap<String, LinkedHashMap<String, Double>> edaaux;// = new
-	// LinkedHashMap<>();
 
 	public Greedy() {
 
 		net = new Network<>();
-		// edaaux = new LinkedHashMap<>();
 
 	}
 	
@@ -55,8 +52,7 @@ public class Greedy {
 				cont = Integer.parseInt(line);
 
 				for (int i = 0; i < cont; i++) {
-					// line=br.readLine();
-					// System.out.println(line +" cont: "+cont+" i: " + i);
+
 					net.addVertex(br.readLine());
 
 				}
@@ -67,8 +63,7 @@ public class Greedy {
 
 					line = br.readLine();
 					items = line.split(" ");
-					// for(String word : items)
-					// System.out.println(word);
+
 					net.addEdge(items[0], items[1], Integer.parseInt(items[2]));
 
 				}
@@ -92,13 +87,14 @@ public class Greedy {
 		return net;
 	}
 
+	/**
+	 * Este metodo nos calcula la arista de menor peso del grafo
+	 * @return devuelve la arista de menor peso del grafo
+	 */
 	private Pavimento obtenerMenorCoste() {
 
-		// LinkedHashMap<String, Double> aux;
-		// Double peso;
 		Pavimento minimo = new Pavimento();
 
-		// Obtenemos la arista de menor coste
 		for (Entry<String, TreeMap<String, Double>> entry : this.net.getAdjacencyMap().entrySet()) {
 			for (Entry<String, Double> entry2 : entry.getValue().entrySet()) {
 
@@ -125,6 +121,10 @@ public class Greedy {
 
 	}
 
+	/**
+	 * Este método es una implementacion del algoritmo de Prim
+	 * @return Nos devuelve un ArrayList con los caminos seleccionados mediante el algoritmo
+	 */
 	public ArrayList<Pavimento> ConexoBase() {
 
 		ArrayList<Pavimento> result = new ArrayList<>();
@@ -159,6 +159,10 @@ public class Greedy {
 		return result;
 	}
 
+	/**
+	 * Este método es una implementacion del algoritmo de Prim usando PriorityQueue
+	 * @return Nos devuelve un ArrayList con los caminos seleccionados mediante el algoritmo
+	 */
 	public ArrayList<Pavimento> ConexoSinPQ() {
 
 		ArrayList<Pavimento> result = new ArrayList<>();
@@ -196,10 +200,14 @@ public class Greedy {
 
 		return result;
 	}
-	
-public ArrayList<Pavimento> NoConexo() {
-		
-		ArrayList<Pavimento> result= new ArrayList<>();
+
+	/**
+	 * Este método es una implementacion del algoritmo de Kruskal
+	 * @return Nos devuelve un ArrayList con los caminos seleccionados mediante el algoritmo
+	 */
+	public ArrayList<Pavimento> NoConexo() {
+
+		ArrayList<Pavimento> result = new ArrayList<>();
 		Pavimento pav = new Pavimento();
 		LinkedList<Pavimento> cola = new LinkedList<Pavimento>();
 		LinkedList<String> Visitados = new LinkedList<>();
@@ -226,7 +234,11 @@ public ArrayList<Pavimento> NoConexo() {
 		return result;
 	}
 
-	public void mergesort(LinkedList<Pavimento> datos) {
+	/**
+	 * Este metodo ordena los datos segun el coste de la arista
+	 * @param datos ArrayList con las aristas a ordenar
+	 */
+	private void mergesort(LinkedList<Pavimento> datos) {
 		mergesort(datos, 0, datos.size() - 1);
 		//return datos;
 	}
@@ -276,6 +288,78 @@ public ArrayList<Pavimento> NoConexo() {
 			x++;
 		}
 
+	}
+	
+	/**
+	 * Este metodo nos permite crear grafos de tamaño a elegir
+	 * @param dirigido Nos indica si es dirigido (true) o no (false)
+	 * @param ciudades Nos indica la cantidad de vertices que queremos que tenga el grafo
+	 * @param caminos Nos indica la cantidad de aristas que queremos que tenga el grafo, no puede ser menor que las ciudades
+	 */
+	public void generadorDeRedes(boolean dirigido, int ciudades, int caminos) {
+
+		if (caminos < ciudades)
+			return;
+
+		TreeMap<String, TreeMap<String, Integer>> mapa = new TreeMap<>();
+		TreeMap<String, Integer> interno;
+		ArrayList<Pavimento> aux = new ArrayList<>();
+		Pavimento pavimento;
+		String red = "";
+		BufferedWriter bw;
+
+		if (dirigido == true)
+			red += "1\n";
+		else
+			red += "0\n";
+
+		red += ciudades + "\n";
+
+		for (int i = 1; i <= ciudades; i++) {
+			red += i + "\n";
+		}
+
+		red += caminos + "\n";
+
+		for (int i = 1; i <= ciudades;) {
+
+			int vertice1 = i;
+			int vertice2 = (int) Math.floor(Math.random() * (ciudades - 1 + 1) + 1);
+
+			while (vertice1 == vertice2)
+				vertice2 = (int) Math.random() * (ciudades - 1 + 1) + 1;
+
+			pavimento = new Pavimento(String.valueOf(vertice1), String.valueOf(vertice2),
+					(int) Math.random() * (510 - 90 + 1) + 90);
+
+			if (!aux.contains(pavimento)) {
+				aux.add(pavimento);
+				i++;
+			}
+		}
+
+		while (aux.size() < caminos) {
+
+			int vertice1 = (int) Math.floor(Math.random() * (ciudades - 1 + 1) + 1);
+			int vertice2 = (int) Math.floor(Math.random() * (ciudades - 1 + 1) + 1);
+
+			while (vertice1 == vertice2)
+				vertice2 = (int) Math.random() * (ciudades - 1 + 1) + 1;
+
+			pavimento = new Pavimento(String.valueOf(vertice1), String.valueOf(vertice2),
+					(int) Math.random() * (510 - 90 + 1) + 90);
+
+			if (!aux.contains(pavimento))
+				aux.add(pavimento);
+		}
+
+		for (Pavimento pav : aux) {
+			interno = mapa.get(pav.getInicio());
+			if (interno == null)
+				mapa.put(pav.getInicio(), interno = new TreeMap<>());
+			interno.put(pav.getFin(), (int) Math.floor(Math.random() * (490 - 90 + 1) + 90));
+
+		}
 	}
 }
 
