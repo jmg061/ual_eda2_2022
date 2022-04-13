@@ -128,7 +128,7 @@ public class Greedy {
 	}
 
 	/**
-	 * Este método es una implementacion del algoritmo de Prim
+	 * Este mï¿½todo es una implementacion del algoritmo de Prim
 	 * @return Nos devuelve un ArrayList con los caminos seleccionados mediante el algoritmo
 	 */
 	public ArrayList<Pavimento> ConexoBase() {
@@ -166,14 +166,14 @@ public class Greedy {
 	}
 
 	/**
-	 * Este método es una implementacion del algoritmo de Prim usando PriorityQueue
+	 * Este mï¿½todo es una implementacion del algoritmo de Prim usando PriorityQueue
 	 * @return Nos devuelve un ArrayList con los caminos seleccionados mediante el algoritmo
 	 */
 	public ArrayList<Pavimento> ConexoSinPQ() {
 
 		ArrayList<Pavimento> result = new ArrayList<>();
 		Pavimento pav = obtenerMenorCoste();
-		LinkedList<Pavimento> cola = new LinkedList<>();
+		ArrayList<Pavimento> cola = new ArrayList<Pavimento>();
 		LinkedList<String> Visitados = new LinkedList<>();
 
 
@@ -184,8 +184,6 @@ public class Greedy {
 				continue;
 			Pavimento aux = new Pavimento(pav.getFin(), ciudad, this.net.getWeight(pav.getFin(), ciudad));
 			cola.add(aux);
-			
-			mergesort(cola);
 		}
 
 		while (Nodos.size() != Visitados.size()) {
@@ -197,10 +195,11 @@ public class Greedy {
 						continue;
 					Pavimento aux = new Pavimento(pav.getFin(), ciudad, this.net.getWeight(pav.getFin(), ciudad));
 					cola.add(aux);
-					mergesort(cola);
 				}
 			}
-			pav = cola.poll();
+			mergesort(cola);
+			pav = cola.get(cola.size() - 1);
+			cola.remove(cola.size() - 1);
 
 		}
 
@@ -208,14 +207,14 @@ public class Greedy {
 	}
 
 	/**
-	 * Este método es una implementacion del algoritmo de Kruskal
+	 * Este mï¿½todo es una implementacion del algoritmo de Kruskal
 	 * @return Nos devuelve un ArrayList con los caminos seleccionados mediante el algoritmo
 	 */
 	public ArrayList<Pavimento> NoConexo() {
 
 		ArrayList<Pavimento> result = new ArrayList<>();
 		Pavimento pav = new Pavimento();
-		LinkedList<Pavimento> cola = new LinkedList<Pavimento>();
+		PriorityQueue<Pavimento> cola = new PriorityQueue<Pavimento>();
 		LinkedList<String> Visitados = new LinkedList<>();
 
 		
@@ -226,7 +225,6 @@ public class Greedy {
 				}
 		}
 		
-		mergesort(cola);
 
 		while (Nodos.size() != Visitados.size()){
 			pav = cola.poll();
@@ -244,13 +242,13 @@ public class Greedy {
 	 * Este metodo ordena los datos segun el coste de la arista
 	 * @param datos ArrayList con las aristas a ordenar
 	 */
-	private void mergesort(LinkedList<Pavimento> datos) {
+	private void mergesort(ArrayList<Pavimento> datos) {
 		mergesort(datos, 0, datos.size() - 1);
 		//return datos;
 	}
 	
 
-	private void mergesort(LinkedList<Pavimento> datos, int izq, int der) { // O(n*log(n))
+	private void mergesort(ArrayList<Pavimento> datos, int izq, int der) { // O(n*log(n))
 		if (izq < der && (der - izq) >= 1) {
 			int medio = (izq + der) / 2;
 			mergesort(datos, izq, medio); // log(n)
@@ -262,7 +260,7 @@ public class Greedy {
 		//return datos;
 	}
 
-	private void merge(LinkedList<Pavimento> datos, int izq, int medio, int der) {
+	private void merge(ArrayList<Pavimento> datos, int izq, int medio, int der) {
 		int i, j, x;
 		LinkedList<Pavimento> aux = new LinkedList<Pavimento>();
 
@@ -297,7 +295,7 @@ public class Greedy {
 	}
 	
 	/**
-	 * Este metodo nos permite crear grafos de tamaño a elegir
+	 * Este metodo nos permite crear grafos de tamaï¿½o a elegir
 	 * @param dirigido Nos indica si es dirigido (true) o no (false)
 	 * @param ciudades Nos indica la cantidad de vertices que queremos que tenga el grafo
 	 * @param caminos Nos indica la cantidad de aristas que queremos que tenga el grafo, no puede ser menor que las ciudades
