@@ -130,7 +130,6 @@ public class Greedy {
 		ArrayList<Pavimento> result = new ArrayList<>();
 		Pavimento pav = obtenerMenorCoste();
 		PriorityQueue<Pavimento> cola = new PriorityQueue<>();
-		LinkedList<String> Nodos = new LinkedList<>();
 		LinkedList<String> Visitados = new LinkedList<>();
 
 		Visitados.add(pav.getInicio());
