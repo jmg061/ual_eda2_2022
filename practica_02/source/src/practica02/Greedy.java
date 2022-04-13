@@ -117,7 +117,7 @@ public class Greedy {
 
 	}
 
-	public void ConexoBase() {
+	public ArrayList<Pavimento> ConexoBase() {
 
 		ArrayList<Pavimento> result = new ArrayList<>();
 		Pavimento pav = obtenerMenorCoste();
@@ -152,12 +152,10 @@ public class Greedy {
 
 		}
 
-		System.out.println(result.size());
-		for (Pavimento aux : result)
-			System.out.println(aux);
+		return result;
 	}
 
-	public void ConexoSinPQ() {
+	public ArrayList<Pavimento> ConexoSinPQ() {
 
 		ArrayList<Pavimento> result = new ArrayList<>();
 		Pavimento pav = obtenerMenorCoste();
@@ -195,11 +193,38 @@ public class Greedy {
 
 		}
 
-		System.out.println(result.size());
-		for (Pavimento aux : result)
-			System.out.println(aux);
+		return result;
 	}
+	
+public ArrayList<Pavimento> NoConexo() {
+		
+		ArrayList<Pavimento> result= new ArrayList<>();
+		Pavimento pav = new Pavimento();
+		PriorityQueue<Pavimento> cola = new PriorityQueue<>();
+		LinkedList<String> Nodos = new LinkedList<>();
+		LinkedList<String> Visitados = new LinkedList<>();
 
+		
+		for(String city : this.net.getAdjacencyMap().keySet()) {
+			Nodos.add(city);
+			
+			for (String ciudad : this.net.getAdjacencyMap().get(city).keySet()) {
+				Pavimento aux = new Pavimento(city, ciudad, this.net.getWeight(city, ciudad));
+				cola.add(aux);
+				}
+		}
+
+		while (Nodos.size() != Visitados.size()){
+			pav = cola.poll();
+			if (!Visitados.contains(pav.getFin()) || !Visitados.contains(pav.getInicio())) {
+				result.add(pav);
+				if (!Visitados.contains(pav.getFin())) Visitados.add(pav.getFin());
+				if (!Visitados.contains(pav.getInicio())) Visitados.add(pav.getInicio());
+			}
+		}
+		
+		return result;
+	}
 	public void mergesort(LinkedList<Pavimento> datos) {
 		mergesort(datos, 0, datos.size() - 1);
 		//return datos;
@@ -251,5 +276,7 @@ public class Greedy {
 		}
 
 	}
-
 }
+
+
+
