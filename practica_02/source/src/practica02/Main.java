@@ -9,7 +9,8 @@ public class Main {
 		Greedy greedy = new Greedy();
 		ArrayList<Pavimento> resultados = new ArrayList<Pavimento>();
 
-		greedy.load("graphEDAlandLarge.txt");
+		greedy.generadorDeRedes(false, 1000, 2500);
+		greedy.load("MiRed");
 //		System.out.println(greedy.getNet());
 		
 		System.out.println();

@@ -26,6 +26,9 @@ public class Greedy {
 
 	}
 	
+	/**
+	 * Carga en el atrubuto net todos los nodos
+	 */
 	public void InicializarNodos() {
 		this.Nodos.clear();
 		for (String city : this.net.getAdjacencyMap().keySet())
@@ -34,7 +37,7 @@ public class Greedy {
 	}
 
 	/**
-	 * Este metodo nos carga los datos con los que vamos a trabajar
+	 * Este metodo nos carga los datos con los que vamos a trabajar y los alamacena en el atributo Net
 	 * @param file archivo donde se encuentran los datos con los que vamos a trabajar
 	 */
 	public void load(String file) {
@@ -94,7 +97,7 @@ public class Greedy {
 	}
 
 	/**
-	 * Este metodo nos calcula la arista de menor peso del grafo
+	 * Calcula la arista de menor peso del grafo
 	 * @return devuelve la arista de menor peso del grafo
 	 */
 	private Pavimento obtenerMenorCoste() {
@@ -128,8 +131,8 @@ public class Greedy {
 	}
 
 	/**
-	 * Este m�todo es una implementacion del algoritmo de Prim
-	 * @return Nos devuelve un ArrayList con los caminos seleccionados mediante el algoritmo
+	 * Una implementacion del algoritmo de Prim.
+	 * @return Nos devuelve un ArrayList con los caminos seleccionados mediante el algoritmo, manteniendo el grafo conexo y haciendo uso de PQ 
 	 */
 	public ArrayList<Pavimento> ConexoBase() {
 
@@ -166,8 +169,8 @@ public class Greedy {
 	}
 
 	/**
-	 * Este m�todo es una implementacion del algoritmo de Prim usando PriorityQueue
-	 * @return Nos devuelve un ArrayList con los caminos seleccionados mediante el algoritmo
+	 * Este metodo es una implementacion del algoritmo de Prim
+	 * @return Nos devuelve un ArrayList con los caminos seleccionados mediante el algoritmo, manteniendo el grafo conexo y sin hacer uso de PQ
 	 */
 	public ArrayList<Pavimento> ConexoSinPQ() {
 
@@ -207,8 +210,8 @@ public class Greedy {
 	}
 
 	/**
-	 * Este m�todo es una implementacion del algoritmo de Kruskal
-	 * @return Nos devuelve un ArrayList con los caminos seleccionados mediante el algoritmo
+	 * Una implementacion del algoritmo de Kruskal
+	 * @return Nos devuelve un ArrayList con los caminos seleccionados mediante el algoritmo, que simplemnete se asegura de que todos los nodos hayan sido visitados
 	 */
 	public ArrayList<Pavimento> NoConexo() {
 
@@ -295,12 +298,12 @@ public class Greedy {
 	}
 	
 	/**
-	 * Este metodo nos permite crear grafos de tama�o a elegir
+	 * Este metodo nos permite crear grafos de tamaño a elegir
 	 * @param dirigido Nos indica si es dirigido (true) o no (false)
 	 * @param ciudades Nos indica la cantidad de vertices que queremos que tenga el grafo
 	 * @param caminos Nos indica la cantidad de aristas que queremos que tenga el grafo, no puede ser menor que las ciudades
 	 */
-	public void generadorDeRedes(boolean dirigido, int ciudades, int caminos) {
+	public void generadorDeRedes(boolean dirigido, int ciudades, long caminos) {
 
 		if (caminos < ciudades)
 			return;
@@ -383,4 +386,5 @@ public class Greedy {
 			e.printStackTrace();
 		}
 	}
+	
 }
