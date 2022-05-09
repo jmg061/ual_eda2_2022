@@ -1,14 +1,6 @@
 package practica02;
 
-import java.awt.Container;
-import java.awt.Graphics;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.swing.JFrame;
 
 public class Main {
 
@@ -17,35 +9,45 @@ public class Main {
 		Greedy greedy = new Greedy();
 		ArrayList<Pavimento> resultados = new ArrayList<Pavimento>();
 
-		greedy.load("graphEDAland.txt");
-		System.out.println(greedy.getNet());
+		greedy.generadorDeRedes(false, 1000, 2500);
+		greedy.load("MiRed");
+//		System.out.println(greedy.getNet());
 		
 		System.out.println();
 		System.out.println("ConexoConPQ");
 		greedy.InicializarNodos();
+		long inicio = System.currentTimeMillis();
 		resultados = greedy.ConexoBase();
-		for (Pavimento pavimento : resultados) {
-			System.out.println("Inicio: " + pavimento.getInicio() + " Fin: " + pavimento.getFin() + "  Coste:" + pavimento.getCoste());
-		}
+		long fin = System.currentTimeMillis();
+		double tiempo = (double) ((fin - inicio));
+		System.out.println("Tiempo => " + tiempo);
+//		for (Pavimento pavimento : resultados) {
+//			System.out.println("Inicio: " + pavimento.getInicio() + " Fin: " + pavimento.getFin() + "  Coste:" + pavimento.getCoste());
+//		}
 		System.out.println();
 		System.out.println("ConexoSinPQ");
 		greedy.InicializarNodos();
+		inicio = System.currentTimeMillis();
 		resultados = greedy.ConexoSinPQ();
-		for (Pavimento pavimento : resultados) {
-			System.out.println("Inicio: " + pavimento.getInicio() + " Fin: " + pavimento.getFin() + "  Coste:" + pavimento.getCoste());
-		}
+		fin = System.currentTimeMillis();
+		tiempo = (double) ((fin - inicio));
+		System.out.println("Tiempo => " + tiempo);
+//		for (Pavimento pavimento : resultados) {
+//			System.out.println("Inicio: " + pavimento.getInicio() + " Fin: " + pavimento.getFin() + "  Coste:" + pavimento.getCoste());
+//		}
 		System.out.println();
 		System.out.println("NoConexo");
 		greedy.InicializarNodos();
+		inicio = System.currentTimeMillis();
 		resultados = greedy.NoConexo();
-		for (Pavimento pavimento : resultados) {
-			System.out.println("Inicio: " + pavimento.getInicio() + " Fin: " + pavimento.getFin() + "  Coste:" + pavimento.getCoste());
-		}
-		
-//		Greedy greedy = new Greedy();
-//		greedy.generadorDeRedes(false, 100, 200);
+		fin = System.currentTimeMillis();
+		tiempo = (double) ((fin - inicio));
+		System.out.println("Tiempo => " + tiempo);
+//		for (Pavimento pavimento : resultados) {
+//			System.out.println("Inicio: " + pavimento.getInicio() + " Fin: " + pavimento.getFin() + "  Coste:" + pavimento.getCoste());
+//		}
+
+		greedy.generadorDeRedes(false, 100, 200);
 
 	}
-
 }
-
