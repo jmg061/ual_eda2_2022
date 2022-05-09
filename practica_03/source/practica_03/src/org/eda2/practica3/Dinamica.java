@@ -9,7 +9,7 @@ public class Dinamica {
 	ArrayList<Tesoro2> tesoros2;
 	//Mochila mochila;
 	int[][] matriz;
-	int carga [];// = new int [n + 1]
+	int carga [];// = new int [n + 1] Indica los tesoros que se cargan en la mochila
 	int maxCapacidad;
 	int cantidadTesoros;
 	int pesoMaximo;
@@ -44,7 +44,7 @@ public class Dinamica {
 	public void pruebas2() {
 		tesoros2 = new ArrayList<>();
 		tesoros2.add(new Tesoro2("0", 0, 0));//Esta posicion no se utiliza
-		tesoros2.add(new Tesoro2("A", 0.25, 2));
+		tesoros2.add(new Tesoro2("A", 0.24, 2));
 		tesoros2.add(new Tesoro2("B", 1.25, 5));
 		tesoros2.add(new Tesoro2("C", 3.75, 6));
 		tesoros2.add(new Tesoro2("D", 5, 10));
@@ -53,11 +53,11 @@ public class Dinamica {
 
 		tesoros2.sort(null);
 
-		/*for (Tesoro2 tesoro2 : tesoros2)
-			System.out.println(tesoro2);*/
+		for (Tesoro2 tesoro2 : tesoros2)
+			System.out.println(tesoro2);
 	}
 
-	public void cargaDatos() {
+	public void cargaDatos() {//Crea tesoros con pesos enteros
 
 		// Inicializamos
 		tesoros = new ArrayList<>();
@@ -81,7 +81,7 @@ public class Dinamica {
 			System.out.println(tesoro);*/
 	}
 	
-	public void cargaDatos2() {
+	public void cargaDatos2() {//Crea tesoros con pesos reales
 
 		// Inicializamos
 		tesoros2 = new ArrayList<>();
@@ -107,7 +107,7 @@ public class Dinamica {
 			System.out.println(tesoro2);*/
 	}
 
-	public void resolucion() {
+	public void resolucion() {//
 		System.out.println(tesoros);
 		//Conjunto vacio
 		for (int i = 0; i <= cantidadTesoros; i++)
@@ -124,7 +124,7 @@ public class Dinamica {
 			}
 		}
 		// Imprime el valor de la tabla f
-		System.out.println("Valor de la tabla f:");
+		System.out.println("Valor de la matriz:");
 		for (int i = 0; i <= cantidadTesoros; i++) {
 			for (int j = 0; j <= maxCapacidad; j++)
 				System.out.printf("%-4d", matriz[i][j]);
@@ -141,9 +141,10 @@ public class Dinamica {
 				carga[i] = 0; // x [i] se establece en 0, el peso de la mochila permanece sin cambios
 		}
 		// imprime el valor y el valor total de la tabla x
-		System.out.println("Valor de la tabla x:");
+		System.out.println("Tesoros introducidos:");
 		for (int i = 1; i <= cantidadTesoros; i++)
-			System.out.print("x" + i + " = " + carga[i] + "\t");
+			if(carga[i]==1)
+				System.out.println(tesoros.get(i));
 		System.out.println();
 		System.out.printf("El valor total es:% d", matriz[cantidadTesoros][maxCapacidad]);
 	}
@@ -193,9 +194,10 @@ public class Dinamica {
 				carga[i] = 0; //No cambia el peso de la mochila
 		}
 		// imprime los objetos cargados
-		System.out.println("Objetos cargados:");
+		System.out.println("Tesoros cargados:");
 		for (int i = 1; i <= cantidadTesoros; i++)
-			System.out.print("x" + i + " = " + carga[i] + "\t");
+			if(carga[i]==1)
+				System.out.println(tesoros2.get(i));
 		System.out.println();
 		System.out.printf("El valor total es:% d", matriz[cantidadTesoros][maxCapacidad]);
 	}

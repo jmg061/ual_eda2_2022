@@ -8,7 +8,10 @@ public class Main {
 		Dinamica dinamica = new Dinamica(8,6, 16, 8);
 
         //dinamica.cargaDatos();
-		dinamica.pruebas2();
+		//dinamica.pruebas();
+        //dinamica.resolucion();
+        
+        dinamica.pruebas2();
         dinamica.resolucion2();
 
 	}

@@ -34,7 +34,7 @@ public class Tesoro implements Comparable<Tesoro>{
 	}
 
 	public String toString(){
-		return "ID: "+this.id+"\n\tPeso: "+this.peso+"\n\tBeneficio: "+this.beneficio+"\n";
+		return "ID: "+this.id+"\n\tPeso: "+this.peso+"\n\tBeneficio: "+this.beneficio;
 	}
 	
 	public String getId() {
