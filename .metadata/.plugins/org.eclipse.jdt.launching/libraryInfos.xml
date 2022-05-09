@@ -19,4 +19,23 @@
 <entry path="I:\Eclipses\GIPP2020EclipseFoundation\JDKS\jdk1.8.0_161\jre\lib\endorsed"/>
 </endorsedDirs>
 </libraryInfo>
+<libraryInfo home="C:\GIPP2020EclipseFoundation\JDKS\jdk1.8.0_161" version="1.8.0_161">
+<bootpath>
+<entry path="C:\GIPP2020EclipseFoundation\JDKS\jdk1.8.0_161\jre\lib\resources.jar"/>
+<entry path="C:\GIPP2020EclipseFoundation\JDKS\jdk1.8.0_161\jre\lib\rt.jar"/>
+<entry path="C:\GIPP2020EclipseFoundation\JDKS\jdk1.8.0_161\jre\lib\sunrsasign.jar"/>
+<entry path="C:\GIPP2020EclipseFoundation\JDKS\jdk1.8.0_161\jre\lib\jsse.jar"/>
+<entry path="C:\GIPP2020EclipseFoundation\JDKS\jdk1.8.0_161\jre\lib\jce.jar"/>
+<entry path="C:\GIPP2020EclipseFoundation\JDKS\jdk1.8.0_161\jre\lib\charsets.jar"/>
+<entry path="C:\GIPP2020EclipseFoundation\JDKS\jdk1.8.0_161\jre\lib\jfr.jar"/>
+<entry path="C:\GIPP2020EclipseFoundation\JDKS\jdk1.8.0_161\jre\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="C:\GIPP2020EclipseFoundation\JDKS\jdk1.8.0_161\jre\lib\ext"/>
+<entry path="C:\Windows\Sun\Java\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="C:\GIPP2020EclipseFoundation\JDKS\jdk1.8.0_161\jre\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
 </libraryInfos>

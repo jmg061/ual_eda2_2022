@@ -1,6 +1,7 @@
 package org.eda2.practica3;
 
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 import java.util.Random;
 
 public class Dinamica {
@@ -44,6 +45,7 @@ public class Dinamica {
 	public void pruebas2() {
 		tesoros2 = new ArrayList<>();
 		tesoros2.add(new Tesoro2("0", 0, 0));//Esta posicion no se utiliza
+
 		tesoros2.add(new Tesoro2("A", 0.24, 2));
 		tesoros2.add(new Tesoro2("B", 1.25, 5));
 		tesoros2.add(new Tesoro2("C", 3.75, 6));
@@ -67,6 +69,7 @@ public class Dinamica {
 			String id = String.valueOf(i + 1);
 			int peso = (int) Math.floor(Math.random() * pesoMaximo) + 1;
 			int beneficio = (int) Math.floor(Math.random() * beneficioMaximo) + 1;
+			if (peso > beneficio) continue;
 			Tesoro tesoroAux = new Tesoro(id, peso, beneficio);
 			if (!tesoros.contains(tesoroAux)) {
 				tesoros.add(tesoroAux);
@@ -93,6 +96,7 @@ public class Dinamica {
 			double peso = 1 + (pesoMaximo - 1) * r.nextDouble();
 			//double peso = Math.floor(Math.random() * pesoMaximo) + 1;
 			int beneficio = (int) Math.floor(Math.random() * beneficioMaximo) + 1;
+			if (peso > beneficio) continue;
 			Tesoro2 tesoroAux = new Tesoro2(id, peso, beneficio);
 			if (!tesoros2.contains(tesoroAux)) {
 				tesoros2.add(tesoroAux);
@@ -118,7 +122,7 @@ public class Dinamica {
 		for (int i = 1; i <= cantidadTesoros; i++) {//Comenzamos desde 1 ya que la posicion 0 no se utilizar
 			for (int j = 1; j <= maxCapacidad; j++) {
 				if (tesoros.get(i).getPeso() > j) //Si el peso > la capacidad de la mochila, no se carga
-					matriz[i][j] = matriz[i - 1][j]; //El valor máximo no cambia
+					matriz[i][j] = matriz[i - 1][j]; //El valor mï¿½ximo no cambia
 				else //Cargamos la mejor solucion en caso de que este elemento se pueda cargar
 					matriz[i][j] = Math.max(matriz[i - 1][j], matriz[i - 1][j - tesoros.get(i).getPeso()] + tesoros.get(i).getBeneficio());
 			}
@@ -134,10 +138,10 @@ public class Dinamica {
 		// Complete el formulario x [i] para calcular el valor total
 		int j = maxCapacidad;
 		for (int i = cantidadTesoros; i > 0; i--) {
-			if (matriz[i][j] > matriz[i - 1][j]) {// Si se carga el i-ésimo ítem
-				carga[i] = 1; // x [i] está configurado
+			if (matriz[i][j] > matriz[i - 1][j]) {// Si se carga el i-ï¿½simo ï¿½tem
+				carga[i] = 1; // x [i] estï¿½ configurado
 				j -= tesoros.get(i).getPeso(); // Peso de la mochila menos w [i]
-			} else // si el ítem i-ésimo no está cargado
+			} else // si el ï¿½tem i-ï¿½simo no estï¿½ cargado
 				carga[i] = 0; // x [i] se establece en 0, el peso de la mochila permanece sin cambios
 		}
 		// imprime el valor y el valor total de la tabla x
@@ -147,6 +151,7 @@ public class Dinamica {
 				System.out.println(tesoros.get(i));
 		System.out.println();
 		System.out.printf("El valor total es:% d", matriz[cantidadTesoros][maxCapacidad]);
+		System.out.println();
 	}
 	
 	public void resolucion2() {
@@ -159,7 +164,7 @@ public class Dinamica {
 		for (int i = 1; i <= cantidadTesoros; i++) {//Comenzamos desde 1 ya que la posicion 0 no se utiliza
 			for (int j = 1; j <= maxCapacidad; j++) {
 				if (tesoros2.get(i).getPeso() > j) //Si el peso > la capacidad de la mochila, no se carga
-					matriz[i][j] = matriz[i - 1][j]; //El valor máximo no cambia
+					matriz[i][j] = matriz[i - 1][j]; //El valor mï¿½ximo no cambia
 				else  //Cargamos la mejor solucion en caso de que este elemento se pueda cargar
 					matriz[i][j] = Math.max(matriz[i - 1][j], matriz[i - 1][j - (int)tesoros2.get(i).getPeso()] + tesoros2.get(i).getBeneficio());
 					//int value = (int)tesoros2.get(i).getPeso();
@@ -182,7 +187,7 @@ public class Dinamica {
 			//System.out.println(matriz[i][(int)j]);
 			//System.out.println(matriz[i - 1][(int)j]);
 			//System.out.println(matriz[i][(int)j] > matriz[i - 1][(int)j]);
-			if (matriz[i][(int)j] > matriz[i - 1][(int)j]) {// Si se carga el i-ésimo ítem
+			if (matriz[i][(int)j] > matriz[i - 1][(int)j]) {// Si se carga el i-ï¿½simo ï¿½tem
 				carga[i] = 1; //Elemento en la mochila
 				j -= tesoros2.get(i).getPeso(); // Restamos el peso
 				if(j>0&&i!=1&&j%1!=0) //Obtenemos el indice peso con el que podemos trabajar en la siguiente iteracion
@@ -200,6 +205,31 @@ public class Dinamica {
 				System.out.println(tesoros2.get(i));
 		System.out.println();
 		System.out.printf("El valor total es:% d", matriz[cantidadTesoros][maxCapacidad]);
+		System.out.println();
+	}
+	
+	public void Greed(){
+		Double PesoActualMuchila = 0.0;
+		PriorityQueue<Tesoro2> aux = new PriorityQueue<Tesoro2>();
+		for (int i = 0; i < cantidadTesoros; i++) {
+			aux.add(tesoros2.get(i));
+		}
+		
+		for (int i = 1; i < cantidadTesoros; i++) {
+			if ((PesoActualMuchila + aux.poll().getPeso()) < pesoMaximo) {
+				carga[1] = 1;
+			}else {
+				carga[1] = 0;
+			}
+		}
+		System.out.println("Objetos cargados:");
+		double valortotal = 0;
+		 for (int i = 1; i < carga.length; i++) {
+			 System.out.print("x" + i + " = " + carga[i] + "\t");
+			 if (carga[i] == 1) valortotal += this.tesoros2.get(i).getBeneficio();
+		}
+		 System.out.println();
+		 System.out.println("El valor total es: " + valortotal);
 	}
 
 }
