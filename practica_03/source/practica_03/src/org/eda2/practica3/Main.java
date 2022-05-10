@@ -14,24 +14,24 @@ public class Main {
 		//dinamica.Greed();
 
         //dinamica.cargaDatos();
-
-		dinamica.pruebas();
-		System.out.println("Dinamicon con Int");
-		inicio = System.currentTimeMillis();
-        dinamica.resolucion();
-        fin = System.currentTimeMillis();
-		tiempo = (double) ((fin - inicio));
-		System.out.println("Tiempo => " + tiempo);
-		System.out.println();
+//
+//		dinamica.pruebas();
+//		System.out.println("Dinamicon con Int");
+//		inicio = System.currentTimeMillis();
+//        dinamica.resolucion();
+//        fin = System.currentTimeMillis();
+//		tiempo = (double) ((fin - inicio));
+//		System.out.println("Tiempo => " + tiempo);
+//		System.out.println();
 		
 		dinamica.pruebas2();
-		System.out.println();
-		System.out.println("Dinamicon con Double");
-		inicio = System.currentTimeMillis();
-        dinamica.resolucion2();
-        fin = System.currentTimeMillis();
-		tiempo = (double) ((fin - inicio));
-		System.out.println("Tiempo => " + tiempo);
+//		System.out.println();
+//		System.out.println("Dinamicon con Double");
+//		inicio = System.currentTimeMillis();
+//        dinamica.resolucion2();
+//        fin = System.currentTimeMillis();
+//		tiempo = (double) ((fin - inicio));
+//		System.out.println("Tiempo => " + tiempo);
 		
 		System.out.println();
 		System.out.println("Greed con Double");

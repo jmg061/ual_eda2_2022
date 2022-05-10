@@ -251,20 +251,22 @@ public class Dinamica {
 		}
 
 		for (int i = 1; i < cantidadTesoros; i++) {
-			if ((PesoActualMuchila + aux.poll().getPeso()) < pesoMaximo) {
-				carga[1] = 1;
+			if ((PesoActualMuchila + aux.peek().getPeso()) < pesoMaximo) {
+				carga[i] = 1;
+				PesoActualMuchila += aux.poll().getPeso();
 			} else {
-				carga[1] = 0;
+				aux.poll();
+				carga[i] = 0;
 			}
 		}
 		System.out.println("Objetos cargados:");
 		double valortotal = 0;
-		for (int i = 1; i < carga.length; i++)
-			// System.out.print("x" + i + " = " + carga[i] + "\t");
+		for (int i = 1; i < carga.length; i++) {
 			if (carga[i] == 1) {
 				valortotal += this.tesoros2.get(i).getBeneficio();
 				result+=tesoros2.get(i)+"\n";
 			}
+		}
 		System.out.print(result);
 		System.out.println("El valor total es: " + valortotal);
 		
