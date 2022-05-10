@@ -253,7 +253,7 @@ public class Dinamica {
 		for (int i = 1; i < cantidadTesoros; i++) {
 			if ((PesoActualMuchila + aux.peek().getPeso()) < pesoMaximo) {
 				carga[i] = 1;
-				PesoActualMuchila += aux.poll().getPeso();
+				PesoActualMuchila = PesoActualMuchila + aux.poll().getPeso();
 			} else {
 				aux.poll();
 				carga[i] = 0;
