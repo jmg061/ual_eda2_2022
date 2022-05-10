@@ -243,7 +243,7 @@ public class Dinamica {
 	}
 
 	public String Greed() {
-		Double PesoActualMuchila = 0.0;
+		Double PesoActualMochila = 0.0;
 		String result = "";
 		PriorityQueue<Tesoro2> aux = new PriorityQueue<Tesoro2>();
 		for (int i = 0; i < cantidadTesoros; i++) {
@@ -251,9 +251,9 @@ public class Dinamica {
 		}
 
 		for (int i = 1; i < cantidadTesoros; i++) {
-			if ((PesoActualMuchila + aux.peek().getPeso()) < pesoMaximo) {
+			if ((PesoActualMochila + aux.peek().getPeso()) < pesoMaximo) {
 				carga[i] = 1;
-				PesoActualMuchila = PesoActualMuchila + aux.poll().getPeso();
+				PesoActualMochila =+ aux.poll().getPeso();
 			} else {
 				aux.poll();
 				carga[i] = 0;
