@@ -1,8 +1,10 @@
 package org.eda2.practica3;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.PriorityQueue;
 import java.util.Random;
+
 
 public class Dinamica {
 
@@ -16,6 +18,12 @@ public class Dinamica {
 	int pesoMaximo;
 	int beneficioMaximo;
 
+	/**
+	 * @param maxCapacidad capacidad maxima de la mochila
+	 * @param cantidadTesoros numero de tesoros
+	 * @param pesoMaximo peso maximo que la mochila puede contener 
+	 * @param beneficioMaximo Beneficio maximo 
+	 */
 	public Dinamica(int maxCapacidad, int cantidadTesoros, int pesoMaximo, int beneficioMaximo) {
 		// mochila = new Mochila(maxCapacidad);
 		matriz = new int[cantidadTesoros + 1][maxCapacidad + 1];
@@ -26,6 +34,9 @@ public class Dinamica {
 		this.beneficioMaximo = beneficioMaximo;
 	}
 
+	/**
+	 * Carga los valores de un jugeo de pruebas int
+	 */
 	public void pruebas() {
 		tesoros = new ArrayList<>();
 		tesoros.add(new Tesoro("0", 0, 0));// Esta posicion no se utiliza
@@ -43,6 +54,9 @@ public class Dinamica {
 		 */
 	}
 
+	/**
+	 * Carga los valores de un jougo de pruebas double 
+	 */
 	public void pruebas2() {
 		tesoros2 = new ArrayList<>();
 		tesoros2.add(new Tesoro2("0", 0, 0));// Esta posicion no se utiliza
@@ -60,6 +74,9 @@ public class Dinamica {
 		 */
 	}
 
+	/**
+	 * Crea tesoros con pesos enteros
+	 */
 	public void cargaDatos() {// Crea tesoros con pesos enteros
 
 		// Inicializamos
@@ -87,6 +104,9 @@ public class Dinamica {
 		 */
 	}
 
+	/**
+	 * Crea tesoros con pesos reales 
+	 */
 	public void cargaDatos2() {// Crea tesoros con pesos reales
 
 		// Inicializamos
@@ -116,6 +136,11 @@ public class Dinamica {
 		 */
 	}
 
+	/**
+	 * Metodono de programacion dinamica que calcula la combinación de tesosros mas optima
+	 * para meter en nuestra mochila con enteros 
+	 * @return String con la combinacion de tesoros mas optima 
+	 */
 	public String[] resolucion() {//
 		String[] result = new String[2];
 		// System.out.println(tesoros);
@@ -173,7 +198,11 @@ public class Dinamica {
 
 		return result;
 	}
-
+	/**
+	 * Metodono de programacion dinamica que calcula la combinación de tesosros mas optima
+	 * para meter en nuestra mochila con reales 
+	 * @return String con la combinacion de tesoros mas optima 
+	 */
 	public String[] resolucion2() {
 		// Conjunto vacio
 		String[] result = new String[2];
@@ -241,34 +270,32 @@ public class Dinamica {
 
 		return result;
 	}
-
+	/**
+	 * Algoritmo Greed, da una solución de manera rapida, pero no garantiza que esta se la optima, funciona con
+	 * reales  
+	 * @return String con la combinacion de tesoros mas optima 
+	 */
 	public String Greed() {
-		Double PesoActualMochila = 0.0;
+		Double PesoActualMuchila = (double)maxCapacidad;
 		String result = "";
-		PriorityQueue<Tesoro2> aux = new PriorityQueue<Tesoro2>();
+		PriorityQueue<Tesoro2> aux = new PriorityQueue<Tesoro2>(Collections.reverseOrder());
 		for (int i = 0; i < cantidadTesoros; i++) {
 			aux.add(tesoros2.get(i));
 		}
 
 		for (int i = 1; i < cantidadTesoros; i++) {
-			if ((PesoActualMochila + aux.peek().getPeso()) < pesoMaximo) {
+			if ((PesoActualMuchila - aux.peek().getPeso()) >= 0) {
+				result+=aux.peek()+"\n";
 				carga[i] = 1;
-				PesoActualMochila =+ aux.poll().getPeso();
+				PesoActualMuchila -= aux.poll().getPeso();
 			} else {
 				aux.poll();
 				carga[i] = 0;
 			}
 		}
-		System.out.println("Objetos cargados:");
-		double valortotal = 0;
-		for (int i = 1; i < carga.length; i++) {
-			if (carga[i] == 1) {
-				valortotal += this.tesoros2.get(i).getBeneficio();
-				result+=tesoros2.get(i)+"\n";
-			}
-		}
+		
 		System.out.print(result);
-		System.out.println("El valor total es: " + valortotal);
+		//System.out.println("El valor total es: " + valortotal);
 		
 		return result;
 	}

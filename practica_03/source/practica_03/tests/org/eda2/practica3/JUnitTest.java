@@ -39,8 +39,11 @@ class JUnitTest {
 			"	Peso: 7.75\n" + 
 			"	Beneficio: 16\n";
 	
-	String tesorosGreed="ID: A\n" + 
-			"	Peso: 0.24\n" +
+	String tesorosGreed="ID: E\n" + 
+			"	Peso: 7.0\n" + 
+			"	Beneficio: 13\n" + 
+			"ID: A\n" + 
+			"	Peso: 0.24\n" + 
 			"	Beneficio: 2\n";
 	
 	@Test
